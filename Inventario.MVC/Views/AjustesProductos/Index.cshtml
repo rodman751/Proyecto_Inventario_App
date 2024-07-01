@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Inventario.Entidades.AjusteProducto>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID_Ajuste)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumeroAjuste)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Impreso)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID_Ajuste)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeroAjuste)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Impreso)
+            </td>
+            <td>
+                @Html.ActionLink("detalles", "GetDetallesSQL", new { id=item.ID_Ajuste })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
