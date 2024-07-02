@@ -1,0 +1,111 @@
+﻿@model Inventario.Entidades.DetalleAjusteProducto
+
+<div>
+    <h4>Detalle Ajuste Producto</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ID_DetalleAjuste)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ID_DetalleAjuste)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ID_Ajuste)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ID_Ajuste)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ID_Producto)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ID_Producto)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CantidadAjustada)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CantidadAjustada)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RazonAjuste)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RazonAjuste)
+        </dd>
+
+        <!-- Detalles del Ajuste Producto -->
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AjusteProducto.NumeroAjuste)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AjusteProducto.NumeroAjuste)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AjusteProducto.Fecha)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AjusteProducto.Fecha)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AjusteProducto.Descripcion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AjusteProducto.Descripcion)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AjusteProducto.Impreso)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AjusteProducto.Impreso)
+        </dd>
+
+        <!-- Detalles del Producto -->
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Producto.Codigo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Producto.Codigo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Producto.Nombre)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Producto.Nombre)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Producto.Descripcion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Producto.Descripcion)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Producto.GravaIVA)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Producto.GravaIVA)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Producto.Costo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Producto.Costo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Producto.PVP)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Producto.PVP)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Producto.Estado)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Producto.Estado)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="GetDetallesSQL" asp-route-id="@ViewBag.ID_Ajuste">Back to List</a>
+</div>

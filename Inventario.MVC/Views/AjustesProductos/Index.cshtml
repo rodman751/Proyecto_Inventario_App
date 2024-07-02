@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<Inventario.Entidades.AjusteProducto>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="NewAjuste" class="btn btn-primary">Crear Ajuste</a>
 </p>
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
             <th>
@@ -31,7 +31,8 @@
                 @Html.DisplayFor(modelItem => item.ID_Ajuste)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NumeroAjuste)
+                @* @Html.DisplayFor(modelItem => item.NumeroAjuste) *@
+                @Html.ActionLink(@Html.DisplayTextFor(modelItem => item.NumeroAjuste).ToString(), "GetDetallesSQL", new { id = item.ID_Ajuste }, new { @class = "btn btn-info" })
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Fecha)
@@ -42,10 +43,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Impreso)
             </td>
-            <td>
-                @Html.ActionLink("detalles", "GetDetallesSQL", new { id=item.ID_Ajuste })
-            </td>
+
         </tr>
 }
     </tbody>
+    
 </table>

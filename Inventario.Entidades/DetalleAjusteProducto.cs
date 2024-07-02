@@ -20,6 +20,6 @@ namespace Inventario.Entidades
         public string RazonAjuste { get; set; }
 
         public AjusteProducto ?AjusteProducto { get; set; }
-        public Producto Producto { get; set; }
+        public Producto ?Producto { get; set; }
     }
 }
