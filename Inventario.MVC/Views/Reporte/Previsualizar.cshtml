@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Previsualizar Reporte";
+}
+
+<h2>Previsualización del Reporte de Ajustes de Inventario</h2>
+
+<iframe src="@Url.Action("VisualizarPDF", "Reporte", new { pdfPath = ViewBag.PDFPath })" width="100%" height="600px"></iframe>
+
+<br />
+<form asp-action="DescargarPDF" method="post">
+    <input type="hidden" name="pdfPath" value="@ViewBag.PDFPath" />
+    <button type="submit" class="btn btn-primary">Descargar PDF</button>
+</form>
