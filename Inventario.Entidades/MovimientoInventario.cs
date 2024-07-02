@@ -26,11 +26,10 @@ namespace Inventario.Entidades
         [Required]
         public int Cantidad { get; set; }
 
-        [Required]
-        public int StockAnterior { get; set; }
+       
 
         [Required]
-        public int StockActual { get; set; }
+        public int StockMovimiento { get; set; }
 
         public Producto Producto { get; set; }
     }

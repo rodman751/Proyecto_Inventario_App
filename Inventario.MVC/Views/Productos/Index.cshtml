@@ -31,6 +31,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Estado)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StockProducto)
+                </th>
                 <th></th>
             </tr>
         </thead>
@@ -60,6 +63,9 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Estado)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StockProducto)
                     </td>
                     <td>
                         @Html.ActionLink("Edit", "Edit", new { id = item.ID_Producto }, new { @class = "btn btn-primary" }) |

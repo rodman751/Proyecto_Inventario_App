@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Inventario.API.Migrations
 {
     /// <inheritdoc />
-    public partial class newdb3 : Migration
+    public partial class Db_act : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -39,7 +39,8 @@ namespace Inventario.API.Migrations
                     GravaIVA = table.Column<bool>(type: "bit", nullable: false),
                     Costo = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     PVP = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Estado = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
+                    Estado = table.Column<bool>(type: "bit", maxLength: 20, nullable: false),
+                    StockProducto = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -55,17 +56,17 @@ namespace Inventario.API.Migrations
                     ID_Ajuste = table.Column<int>(type: "int", nullable: false),
                     ID_Producto = table.Column<int>(type: "int", nullable: false),
                     CantidadAjustada = table.Column<int>(type: "int", nullable: false),
-                    RazonAjuste = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AjusteProductoID_Ajuste = table.Column<int>(type: "int", nullable: true)
+                    RazonAjuste = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DetalleAjusteProducto", x => x.ID_DetalleAjuste);
                     table.ForeignKey(
-                        name: "FK_DetalleAjusteProducto_AjusteProducto_AjusteProductoID_Ajuste",
-                        column: x => x.AjusteProductoID_Ajuste,
+                        name: "FK_DetalleAjusteProducto_AjusteProducto_ID_Ajuste",
+                        column: x => x.ID_Ajuste,
                         principalTable: "AjusteProducto",
-                        principalColumn: "ID_Ajuste");
+                        principalColumn: "ID_Ajuste",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_DetalleAjusteProducto_Producto_ID_Producto",
                         column: x => x.ID_Producto,
@@ -85,8 +86,7 @@ namespace Inventario.API.Migrations
                     NumeroDocumento = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     FechaMovimiento = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Cantidad = table.Column<int>(type: "int", nullable: false),
-                    StockAnterior = table.Column<int>(type: "int", nullable: false),
-                    StockActual = table.Column<int>(type: "int", nullable: false)
+                    StockMovimiento = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -100,9 +100,9 @@ namespace Inventario.API.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_DetalleAjusteProducto_AjusteProductoID_Ajuste",
+                name: "IX_DetalleAjusteProducto_ID_Ajuste",
                 table: "DetalleAjusteProducto",
-                column: "AjusteProductoID_Ajuste");
+                column: "ID_Ajuste");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DetalleAjusteProducto_ID_Producto",

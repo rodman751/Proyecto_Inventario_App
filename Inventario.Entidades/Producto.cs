@@ -29,7 +29,10 @@ namespace Inventario.Entidades
         public decimal PVP { get; set; }
 
         [Required]
-        [MaxLength(20)]
-        public string Estado { get; set; }
+        public bool Estado { get; set; }
+
+        public int StockProducto { get; set; }
+
+
     }
 }

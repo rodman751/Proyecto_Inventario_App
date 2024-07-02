@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Inventario.API.Migrations
 {
     [DbContext(typeof(DbContext))]
-    [Migration("20240701150427_newdb3")]
-    partial class newdb3
+    [Migration("20240702171940_Db_act")]
+    partial class Db_act
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,9 +60,6 @@ namespace Inventario.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID_DetalleAjuste"));
 
-                    b.Property<int?>("AjusteProductoID_Ajuste")
-                        .HasColumnType("int");
-
                     b.Property<int>("CantidadAjustada")
                         .HasColumnType("int");
 
@@ -78,7 +75,7 @@ namespace Inventario.API.Migrations
 
                     b.HasKey("ID_DetalleAjuste");
 
-                    b.HasIndex("AjusteProductoID_Ajuste");
+                    b.HasIndex("ID_Ajuste");
 
                     b.HasIndex("ID_Producto");
 
@@ -107,10 +104,7 @@ namespace Inventario.API.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("StockActual")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StockAnterior")
+                    b.Property<int>("StockMovimiento")
                         .HasColumnType("int");
 
                     b.Property<string>("TipoMovimiento")
@@ -145,10 +139,9 @@ namespace Inventario.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Estado")
-                        .IsRequired()
+                    b.Property<bool>("Estado")
                         .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("bit");
 
                     b.Property<bool>("GravaIVA")
                         .HasColumnType("bit");
@@ -161,6 +154,9 @@ namespace Inventario.API.Migrations
                     b.Property<decimal>("PVP")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("StockProducto")
+                        .HasColumnType("int");
+
                     b.HasKey("ID_Producto");
 
                     b.ToTable("Producto");
@@ -168,15 +164,19 @@ namespace Inventario.API.Migrations
 
             modelBuilder.Entity("Inventario.Entidades.DetalleAjusteProducto", b =>
                 {
-                    b.HasOne("Inventario.Entidades.AjusteProducto", null)
-                        .WithMany("Detalles")
-                        .HasForeignKey("AjusteProductoID_Ajuste");
+                    b.HasOne("Inventario.Entidades.AjusteProducto", "AjusteProducto")
+                        .WithMany("DetalleAjusteProducto")
+                        .HasForeignKey("ID_Ajuste")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Inventario.Entidades.Producto", "Producto")
                         .WithMany()
                         .HasForeignKey("ID_Producto")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("AjusteProducto");
 
                     b.Navigation("Producto");
                 });
@@ -194,7 +194,7 @@ namespace Inventario.API.Migrations
 
             modelBuilder.Entity("Inventario.Entidades.AjusteProducto", b =>
                 {
-                    b.Navigation("Detalles");
+                    b.Navigation("DetalleAjusteProducto");
                 });
 #pragma warning restore 612, 618
         }
