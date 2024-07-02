@@ -1,0 +1,55 @@
+﻿@model Inventario.Entidades.DetalleAjusteProducto
+
+<h4>DetalleAjusteProducto</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ID_DetalleAjuste" class="control-label" hidden></label>
+                <input asp-for="ID_DetalleAjuste" class="form-control" value="0" hidden />
+                <span asp-validation-for="ID_DetalleAjuste" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ID_Ajuste" class="control-label" hidden></label>
+                <input asp-for="ID_Ajuste" class="form-control" id="ID_Ajuste" name="ID_Ajuste" value=""  hidden   />
+                <span asp-validation-for="ID_Ajuste" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ID_Producto" class="control-label"></label>
+                <select asp-for="ID_Producto" class="form-control" asp-items="ViewBag.Productos"></select>
+                <span asp-validation-for="ID_Producto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CantidadAjustada" class="control-label"></label>
+                <input asp-for="CantidadAjustada" class="form-control" />
+                <span asp-validation-for="CantidadAjustada" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RazonAjuste" class="control-label"></label>
+                <input asp-for="RazonAjuste" class="form-control" />
+                <span asp-validation-for="RazonAjuste" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        // Asegúrate de que el script se ejecuta cuando el DOM está completamente cargado
+        document.addEventListener("DOMContentLoaded", function () {
+            // Asignar el valor del ID_Ajuste desde el ViewBag
+            var idAjuste = @ViewBag.ID_Ajuste;
+            document.getElementById("ID_Ajuste").value = idAjuste;
+        });
+    </script>
+}

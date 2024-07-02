@@ -4,6 +4,8 @@ using Inventario.Entidades;
 using Inventario.Entidades.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Inventario.MVC.Controllers
 {
@@ -13,10 +15,16 @@ namespace Inventario.MVC.Controllers
 
         private string urlApi;
         private string urlApi2;
+        private string Productos;
+        private string postdetalles;
+
         public AjustesProductosController(IConfiguration configuration, INotyfService notyfService)
         {
             urlApi = configuration.GetValue("ApiUrlBase", "").ToString() + "/AjusteProducto";
             urlApi2 = configuration.GetValue("ApiUrlBase", "").ToString() + "/DetalleAjusteProducto/GetAjusteDetalles";
+            Productos = configuration.GetValue("ApiUrlBase", "").ToString() + "/Producto";
+            postdetalles= configuration.GetValue("ApiUrlBase", "").ToString() + "/DetalleAjusteProducto";
+
             _notifyService = notyfService;
         }
         // GET: AjustesProductosController
@@ -30,54 +38,83 @@ namespace Inventario.MVC.Controllers
 
         public async Task<ActionResult> getDetallesSQL(int id)
         {
-           
-
-
             var data = await CRUD<DetalleAjusteProductoDTO>.Read_ByIdSQLAsync(urlApi2, id);
+            ViewBag.ID_Ajuste = id;
             return View(data);
         }
 
         // GET: AjustesProductosController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var data = CRUD<DetalleAjusteProducto>.Read_ById(postdetalles, id);
+            int idAjuste = data.ID_Ajuste;
+            ViewBag.ID_Ajuste = idAjuste;
+            return View(data);
         }
 
         // GET: AjustesProductosController/Create
-        public ActionResult Create()
+        public ActionResult CreateDetalleAjusteProducto(int id)
         {
+            var productos = CRUD<Producto>.Read(Productos);
+            ViewBag.Productos = new SelectList(productos, "ID_Producto", "Nombre");
+            ViewBag.ID_Ajuste = id;
             return View();
         }
+
 
         // POST: AjustesProductosController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(DetalleAjusteProducto ajusteProducto)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    
+                    var newData = CRUD<DetalleAjusteProducto>.Created(postdetalles, ajusteProducto);
+                    
+                    _notifyService.Success("detalle Ajuste de producto creado correctamente");
+                    return RedirectToAction("getDetallesSQL", new { id = newData.ID_Ajuste });
+                }
+                else
+                {
+                    _notifyService.Error("Error al crear el Empleados");
+                    return PartialView("Index", ajusteProducto);
+                }
+
             }
             catch
             {
                 return View();
             }
         }
-
-        // GET: AjustesProductosController/Edit/5
-        public ActionResult Edit(int id)
+        
+        public ActionResult NewAjuste( )
         {
             return View();
         }
 
-        // POST: AjustesProductosController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult CreateNewAjuste(AjusteProducto ajusteProducto)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+
+                    var newData = CRUD<AjusteProducto>.Created(urlApi, ajusteProducto);
+
+                    _notifyService.Success(" Ajuste  creado correctamente");
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    _notifyService.Error("Error al crear el Ajuste");
+                    return PartialView("Index");
+                }
+
             }
             catch
             {
@@ -85,25 +122,6 @@ namespace Inventario.MVC.Controllers
             }
         }
 
-        // GET: AjustesProductosController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
-        // POST: AjustesProductosController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

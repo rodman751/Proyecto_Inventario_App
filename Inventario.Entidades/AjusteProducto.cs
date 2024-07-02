@@ -22,7 +22,7 @@ namespace Inventario.Entidades
         public bool Impreso { get; set; }
 
 
-        public List<DetalleAjusteProducto> DetalleAjusteProducto { get; set; }
+        public List<DetalleAjusteProducto>? DetalleAjusteProducto { get; set; }
     }
 }
 
