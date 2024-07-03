@@ -42,6 +42,17 @@ namespace Inventario.MVC.Controllers
         {
             try
             {
+                var pvp = collection.Costo;
+                if(collection.GravaIVA == true)
+                {
+                    pvp = pvp +(pvp * 0.15m);
+                    collection.PVP = pvp;
+                }
+                else
+                {
+                    collection.PVP = pvp;
+                }
+                
                 var data = CRUD<Producto>.Created(Productos, collection);
                 _notifyService.Success("Producto creado");
                 return RedirectToAction(nameof(Index));
@@ -56,6 +67,7 @@ namespace Inventario.MVC.Controllers
         public ActionResult Edit(int id)
         {
             var data = CRUD<Producto>.Read_ById(Productos,id);
+
             return View(data);
         }
 
@@ -66,7 +78,18 @@ namespace Inventario.MVC.Controllers
         {
             try
             {
+                var pvp = collection.Costo;
+                if (collection.GravaIVA == true)
+                {
+                    pvp = pvp + (pvp * 0.15m);
+                    collection.PVP = pvp;
+                }
+                else
+                {
+                    collection.PVP = pvp;
+                }
                 var data = CRUD<Producto>.Update(Productos, id, collection);
+
                 _notifyService.Information("Producto actualizado");
                 return RedirectToAction(nameof(Index));
             }
