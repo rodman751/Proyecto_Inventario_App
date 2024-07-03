@@ -17,6 +17,7 @@ namespace Inventario.MVC.Controllers
         private string urlApi2;
         private string Productos;
         private string postdetalles;
+        private string getCodigo;
 
         public AjustesProductosController(IConfiguration configuration, INotyfService notyfService)
         {
@@ -24,6 +25,8 @@ namespace Inventario.MVC.Controllers
             urlApi2 = configuration.GetValue("ApiUrlBase", "").ToString() + "/DetalleAjusteProducto/GetAjusteDetalles";
             Productos = configuration.GetValue("ApiUrlBase", "").ToString() + "/Producto";
             postdetalles= configuration.GetValue("ApiUrlBase", "").ToString() + "/DetalleAjusteProducto";
+            getCodigo = configuration.GetValue("ApiUrlBase", "").ToString() + "/AjusteProducto/LastAjuste";
+
 
             _notifyService = notyfService;
         }
@@ -92,7 +95,18 @@ namespace Inventario.MVC.Controllers
         
         public ActionResult NewAjuste( )
         {
+            var lastAjuste = CRUD<AjusteProducto>.Read_lastcod(getCodigo);
+            string newNumeroAjuste = lastAjuste.NumeroAjuste;
+            if (lastAjuste != null)
+            {
+                // Extraer el número actual y generar el siguiente
+                int lastNumber = int.Parse(lastAjuste.NumeroAjuste.Substring(2));
+                newNumeroAjuste = "AJ" + (lastNumber + 1).ToString("D3");
+            }
+
+            ViewBag.NewNumeroAjuste = newNumeroAjuste;
             return View();
+            
         }
 
         [HttpPost]

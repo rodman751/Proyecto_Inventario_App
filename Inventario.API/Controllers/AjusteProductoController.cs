@@ -108,10 +108,25 @@ namespace Inventario.API.Controllers
 
             return NoContent();
         }
+        [HttpGet("LastAjuste")]
+        public async Task<ActionResult<AjusteProducto>> GetLastAjuste()
+        {
+            var lastAjuste = await _context.AjusteProducto
+                .OrderByDescending(a => a.ID_Ajuste)
+                .FirstOrDefaultAsync();
 
+            if (lastAjuste == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(lastAjuste);
+        }
         private bool AjusteProductoExists(int id)
         {
             return _context.AjusteProducto.Any(e => e.ID_Ajuste == id);
         }
+
+        
     }
 }

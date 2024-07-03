@@ -13,9 +13,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="NumeroAjuste" class="control-label"></label>
-                <input asp-for="NumeroAjuste" class="form-control" />
+                <input asp-for="NumeroAjuste" class="form-control" value="@ViewBag.NewNumeroAjuste" readonly  />
                 <span asp-validation-for="NumeroAjuste" class="text-danger"></span>
-            </div>
+            </div> 
             <div class="form-group">
                 <label asp-for="Fecha" class="control-label"></label>
                 <input asp-for="Fecha" class="form-control" />
@@ -27,7 +27,7 @@
                 <span asp-validation-for="Descripcion" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
-                <label class="form-check-label">
+                <label class="form-check-label" hidden>
                     <input class="form-check-input" asp-for="Impreso" hidden /> @Html.DisplayNameFor(model => model.Impreso)
                 </label>
             </div>

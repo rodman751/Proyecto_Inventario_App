@@ -71,6 +71,18 @@ namespace Inventario.ConsumeAPI
                 return result;
             }
         }
+        public static T Read_lastcod(string urlApi)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var response = client.GetStringAsync(urlApi);
+                response.Wait();
+
+                var json = response.Result;
+                var result = JsonConvert.DeserializeObject<T>(json);
+                return result;
+            }
+        }
 
 
 
