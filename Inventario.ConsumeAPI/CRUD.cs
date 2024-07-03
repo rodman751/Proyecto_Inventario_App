@@ -66,9 +66,19 @@ namespace Inventario.ConsumeAPI
         {
             using (HttpClient client = new HttpClient())
             {
-                var response = await client.GetStringAsync(urlApi + "/" + id);
-                var result = JsonConvert.DeserializeObject<List<T>>(response);
-                return result;
+                try
+                {
+                    var response = await client.GetStringAsync(urlApi + "/" + id);
+                    var result = JsonConvert.DeserializeObject<List<T>>(response);
+                    return result;
+                }
+                catch (HttpRequestException ex)
+                {
+                    // Aquí puedes manejar el error según tus necesidades
+                    // Por ejemplo, podrías lograr el error, redirigir a una página de error, o retornar una lista vacía
+                    Console.WriteLine($"Error al consultar la API: {ex.Message}");
+                    return new List<T>(); // Retorna una lista vacía o null, dependiendo de tu lógica
+                }
             }
         }
         public static T Read_lastcod(string urlApi)

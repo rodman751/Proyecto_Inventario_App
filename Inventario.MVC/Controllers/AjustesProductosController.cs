@@ -5,6 +5,7 @@ using Inventario.Entidades.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.OpenApi.Writers;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Inventario.MVC.Controllers
@@ -117,7 +118,7 @@ namespace Inventario.MVC.Controllers
             {
                 if (ModelState.IsValid)
                 {
-
+                   
                     var newData = CRUD<AjusteProducto>.Created(urlApi, ajusteProducto);
 
                     _notifyService.Success(" Ajuste  creado correctamente");
