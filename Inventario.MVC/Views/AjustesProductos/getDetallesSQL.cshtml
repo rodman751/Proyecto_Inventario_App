@@ -68,13 +68,20 @@
                 @Html.DisplayFor(modelItem => item.RazonAjuste)
             </td>
             <td>
-                @* @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-primary" }) | *@
-                @Html.ActionLink("Details", "Details", new {  id=item.ID_DetalleAjuste}, new { @class = "btn btn-info" }) 
-                @* @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-danger" }) *@
+                @Html.ActionLink("Edit", "Edit", new { id=item.ID_DetalleAjuste }, new { @class = "btn btn-primary" }) |
+                @Html.ActionLink("Details", "Details", new {  id=item.ID_DetalleAjuste}, new { @class = "btn btn-info" })|
+                    <form asp-action="Delete" asp-route-id="@item.ID_DetalleAjuste" method="post" style="display:inline;" onsubmit="return confirmDelete();">
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
             </td>
         </tr>
 }
     </tbody>
 </table>
+<script>
+    function confirmDelete() {
+        return confirm("¿Estás seguro de que deseas eliminar?");
+    }
+</script>
 
 
