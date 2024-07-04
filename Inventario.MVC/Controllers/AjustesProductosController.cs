@@ -64,6 +64,40 @@ namespace Inventario.MVC.Controllers
             ViewBag.ID_Ajuste = id;
             return View();
         }
+        public ActionResult Edit(int id)
+        {
+            var data = CRUD<DetalleAjusteProducto>.Read_ById(postdetalles, id);
+            var productos = CRUD<Producto>.Read(Productos);
+            ViewBag.Productos = new SelectList(productos, "ID_Producto", "Nombre");
+            
+            return View(data);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(DetalleAjusteProducto ajusteProducto, int id)
+        {
+            try
+            {
+                int idAjuste = ajusteProducto.ID_Ajuste;
+                if (ModelState.IsValid)
+                {
+                    
+                    var newData = CRUD<DetalleAjusteProducto>.Update(postdetalles, id, ajusteProducto);
+                    _notifyService.Success("Detalle Ajuste de producto actualizado correctamente");
+                    return RedirectToAction("getDetallesSQL", new { id = idAjuste });
+                }
+                else
+                {
+                    _notifyService.Error("Error al actualizar el detalle Ajuste de producto");
+                    return RedirectToAction("getDetallesSQL", new { id = idAjuste });
+                }
+
+            }
+            catch
+            {
+                return View();
+            }
+        }
 
 
         // POST: AjustesProductosController/Create
@@ -128,6 +162,34 @@ namespace Inventario.MVC.Controllers
                 {
                     _notifyService.Error("Error al crear el Ajuste");
                     return PartialView("Index");
+                }
+
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                var pro = CRUD<DetalleAjusteProducto>.Read_ById(postdetalles, id);
+                var idAjuste = pro.ID_Ajuste;
+                if (ModelState.IsValid)
+                {
+
+                    var newData = CRUD<AjusteProducto>.Delete(postdetalles, id);
+
+                    _notifyService.Information(" Ajuste  Eliminado correctamente");
+                    return RedirectToAction("getDetallesSQL", new { id = idAjuste });
+                }
+                else
+                {
+                    _notifyService.Error("Error al Eliminar el detalle");
+                    return RedirectToAction("getDetallesSQL", new { id = idAjuste });
                 }
 
             }
