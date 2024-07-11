@@ -62,6 +62,25 @@ namespace Inventario.ConsumeAPI
             }
 
         }
+
+        public static T Read_Token(string urlApi, string token)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                // Agregar el encabezado de autorización
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+                // Realizar la solicitud HTTP
+                var response = client.GetStringAsync(urlApi);
+                response.Wait();
+
+                // Leer la respuesta JSON
+                var json = response.Result;
+                var result = JsonConvert.DeserializeObject<T>(json);
+                return result;
+            }
+        }
+
         public static async Task<List<T>> Read_ByIdSQLAsync(string urlApi, int id)
         {
             using (HttpClient client = new HttpClient())
@@ -148,6 +167,36 @@ namespace Inventario.ConsumeAPI
                 }
             }
         }
+        public static T Login(string urlApi, string username, string password)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(urlApi);
+                client.DefaultRequestHeaders.Accept.Add(
+                    System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json")
+                );
+
+                var loginData = new
+                {
+                    usr_user = username,
+                    usr_password = password
+                };
+
+                var json = Newtonsoft.Json.JsonConvert.SerializeObject(loginData);
+                var request = new HttpRequestMessage(HttpMethod.Post, urlApi);
+                request.Content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var response = client.SendAsync(request);
+                response.Wait();
+
+                json = response.Result.Content.ReadAsStringAsync().Result;
+                var result = JsonConvert.DeserializeObject<T>(json);
+
+                return result;
+            }
+        }
+
+
     }
 }
 
