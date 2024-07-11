@@ -2,6 +2,7 @@
 using Inventario.ConsumeAPI;
 using Inventario.Entidades;
 using Inventario.Entidades.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -32,6 +33,7 @@ namespace Inventario.MVC.Controllers
             _notifyService = notyfService;
         }
         // GET: AjustesProductosController
+        [Authorize]
         public ActionResult Index()
         {
 
