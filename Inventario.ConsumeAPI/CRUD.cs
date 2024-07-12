@@ -80,6 +80,41 @@ namespace Inventario.ConsumeAPI
                 return result;
             }
         }
+        //public static T Read_Token_getROL(string urlApi, string token, string id)
+        //{
+        //    using (HttpClient client = new HttpClient())
+        //    {
+        //        // Agregar el encabezado de autorización
+        //        client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+        //        // Realizar la solicitud HTTP
+        //        var response = client.GetStringAsync(urlApi+ "/" + id);
+        //        response.Wait();
+
+        //        // Leer la respuesta JSON
+        //        var json = response.Result;
+        //        var result = JsonConvert.DeserializeObject<T>(json);
+        //        return result;
+        //    }
+        //}
+        public static RoleResponse Read_Token_getROL(string urlApi, string token, string id)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                // Agregar el encabezado de autorización
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+                // Realizar la solicitud HTTP
+                var response = client.GetStringAsync(urlApi + "/" + id);
+                response.Wait();
+
+                // Leer la respuesta JSON
+                var json = response.Result;
+                var result = JsonConvert.DeserializeObject<RoleResponse>(json);
+                return result;
+            }
+        }
+
 
         public static async Task<List<T>> Read_ByIdSQLAsync(string urlApi, int id)
         {

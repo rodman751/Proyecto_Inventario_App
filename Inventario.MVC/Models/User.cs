@@ -12,5 +12,6 @@
         public string usr_email { get; set; }
         public string usr_password { get; set; }
         public string usr_state { get; set; }
+       
     }
 }
