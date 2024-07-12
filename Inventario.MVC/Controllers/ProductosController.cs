@@ -1,6 +1,7 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Inventario.ConsumeAPI;
 using Inventario.Entidades;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,8 +18,10 @@ namespace Inventario.MVC.Controllers
             _notifyService = notyfService;
         }
         // GET: ProductosController
+        [Authorize(Roles = "Administrador Compras,Bodeguero Inventario")]
         public ActionResult Index()
         {
+            
             var data = CRUD<Producto>.Read(Productos);
             return View(data);
         }
@@ -123,5 +126,7 @@ namespace Inventario.MVC.Controllers
                 return View();
             }
         }
+
+       
     }
 }

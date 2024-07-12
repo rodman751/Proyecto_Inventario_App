@@ -1,7 +1,14 @@
 ﻿@model IEnumerable<Inventario.Entidades.AjusteProducto>
+@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+
+@{
+    var user = User;
+    var userRole = user.FindFirst("Rol")?.Value;
+}
 
 <p>
-    <a asp-action="NewAjuste" class="btn btn-primary">Crear Ajuste</a>
+    <a asp-action="NewAjuste" class="btn btn-primary" id="Inventario">Crear Ajuste</a>
 </p>
 <table class="table table-striped">
     <thead class="table-dark">
@@ -32,7 +39,7 @@
             </td>
             <td>
                 @* @Html.DisplayFor(modelItem => item.NumeroAjuste) *@
-                @Html.ActionLink(@Html.DisplayTextFor(modelItem => item.NumeroAjuste).ToString(), "GetDetallesSQL", new { id = item.ID_Ajuste }, new { @class = "btn btn-info" })
+                    @Html.ActionLink(@Html.DisplayTextFor(modelItem => item.NumeroAjuste).ToString(), "GetDetallesSQL", new { id = item.ID_Ajuste }, new { @class = "btn btn-info", id = "actionLink" })
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Fecha)
@@ -49,3 +56,32 @@
     </tbody>
     
 </table>
+<script>
+    var userRole = '@userRole';
+    const inventario = document.getElementById("Inventario");
+    const actionLink = document.getElementById("actionLink");
+
+    if (userRole !== "Administrador Compras") {
+        inventario.disabled = true; // Deshabilitar el botón
+        inventario.style.cursor = "not-allowed";
+        inventario.onclick = function (event) {
+            event.preventDefault(); // Prevenir la acción predeterminada
+        };
+        inventario.style.pointerEvents = "none";
+
+
+        // Prevenir el clic en el enlace
+        actionLink.style.pointerEvents = "none"; // Deshabilita el clic
+        actionLink.style.cursor = "not-allowed"; // Cambia el cursor
+        actionLink.onclick = function (event) {
+            event.preventDefault(); // Prevenir la acción predeterminada
+        };
+    } else {
+        inventario.disabled = false; // Habilitar el botón
+        inventario.style.cursor = "pointer";
+
+        // Habilitar el enlace
+        actionLink.style.pointerEvents = "auto"; // Habilita el clic
+        actionLink.style.cursor = "pointer"; // Cambia el cursor
+    }
+</script>

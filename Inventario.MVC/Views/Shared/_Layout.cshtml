@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -19,15 +21,34 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="AjustesProductos" asp-action="Index">Lista de Ajustes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Productos" asp-action="Index">Producotos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Salir">Salir</a>
-                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            var userRole = User.FindFirst("Rol")?.Value;
+
+                            @if (userRole == "Administrador Compras")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="AjustesProductos" asp-action="Index">Lista de Ajustes</a>
+                                </li>
+                            }
+
+                            @if (userRole == "Administrador Compras" || userRole == "Admin")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Productos" asp-action="Index">Productos</a>
+                                </li>
+                            }
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Salir">Salir</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Index">Login</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

@@ -1,4 +1,5 @@
 using Inventario.MVC.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -28,5 +29,13 @@ namespace Inventario.MVC.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
+
     }
 }

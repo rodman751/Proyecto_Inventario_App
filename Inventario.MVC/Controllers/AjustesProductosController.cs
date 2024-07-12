@@ -33,7 +33,7 @@ namespace Inventario.MVC.Controllers
             _notifyService = notyfService;
         }
         // GET: AjustesProductosController
-        [Authorize]
+        [Authorize(Roles= "Administrador Compras")]
         public ActionResult Index()
         {
 

@@ -19,18 +19,27 @@ namespace Inventario.MVC
                     {
                         config.Cookie.Name = "auth_token";
                         config.LoginPath = "/Login/Index";
+                        config.AccessDeniedPath = "/Home/AccessDenied";
                         config.ExpireTimeSpan = TimeSpan.FromMinutes(1);
                     });
+            
+
+            //
 
             builder.Services.AddMvc(options =>
             {
                 options.EnableEndpointRouting = false; // Deshabilitar el enrutamiento de puntos finales
             });
 
+
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddNotyf(config => { config.DurationInSeconds = 10; config.IsDismissable = true; config.Position = NotyfPosition.BottomRight; });
-
+            // vistas cookies
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = "Home/AccessDenied";
+            });
 
             var cultureInfo = new CultureInfo("en-US");
             cultureInfo.NumberFormat.CurrencyDecimalSeparator = ".";
