@@ -1,47 +1,49 @@
 ﻿@model Inventario.Entidades.AjusteProducto
 
-<h4>AjusteProducto</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+
+<div class="container">
+    <div class="header">
+        <h1>Ajuste de Producto</h1>
+        <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+    </div>
+    <div class="form-container">
         <form asp-action="CreateNewAjuste">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="ID_Ajuste" class="control-label" hidden></label>
-                <input asp-for="ID_Ajuste" class="form-control" value="0" hidden/>
+            <div class="input_box">
+                <input asp-for="ID_Ajuste" class="input-field" value="0" hidden />
                 <span asp-validation-for="ID_Ajuste" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="NumeroAjuste" class="control-label"></label>
-                <input asp-for="NumeroAjuste" class="form-control" value="@ViewBag.NewNumeroAjuste" readonly  />
+            <div class="input_box">
+                <input asp-for="NumeroAjuste" class="input-field" value="@ViewBag.NewNumeroAjuste" readonly />
+                <label asp-for="NumeroAjuste" class="label">Número de Ajuste</label>
+                <i class="bx bx-hash icon"></i>
                 <span asp-validation-for="NumeroAjuste" class="text-danger"></span>
-            </div> 
-            <div class="form-group">
-                <label asp-for="Fecha" class="control-label"></label>
-                <input asp-for="Fecha" class="form-control" />
+            </div>
+            <div class="input_box">
+                <input asp-for="Fecha" class="input-field" />
+                <label asp-for="Fecha" class="label">Fecha</label>
+                <i class="bx bx-calendar icon"></i>
                 <span asp-validation-for="Fecha" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Descripcion" class="control-label"></label>
-                <input asp-for="Descripcion" class="form-control" />
+            <div class="input_box">
+                <input asp-for="Descripcion" class="input-field" />
+                <label asp-for="Descripcion" class="label">Descripción</label>
+                <i class="bx bx-comment-detail icon"></i>
                 <span asp-validation-for="Descripcion" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label" hidden>
-                    <input class="form-check-input" asp-for="Impreso" hidden /> @Html.DisplayNameFor(model => model.Impreso)
-                </label>
+            <div class="input_box" hidden>
+                <input asp-for="Impreso" class="input-field" hidden />
+                <span asp-validation-for="Impreso" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="input_box">
+                <input type="submit" value="Crear" class="btn btn-primary" />
             </div>
         </form>
     </div>
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

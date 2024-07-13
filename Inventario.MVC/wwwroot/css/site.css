@@ -17,6 +17,443 @@ html {
   min-height: 100%;
 }
 
-body {
-  margin-bottom: 60px;
+/*css login*/
+
+:root {
+    --primary-color: #c6c3c3;
+    /*--second-color: #ffffff;*/
+    --black-color: #000000;
 }
+
+body {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+a {
+    text-decoration: none;
+    color: var(--second-color);
+}
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+.wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 82.5vh;
+    /*background-color: rgba(0, 0, 0, 0.2);*/
+}
+
+.login_box {
+    position: relative;
+    width: 450px;
+    backdrop-filter: blur(25px);
+    border: 2px solid var(--primary-color);
+    border-radius: 15px;
+    padding: 7.5em 2.5em 4em 2.5em;
+    color: var(--second-color);
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
+}
+
+.login-header {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+    width: 140px;
+    height: 70px;
+    border-radius: 0 0 20px 20px;
+}
+
+    .login-header span {
+        font-size: 30px;
+        color: var(--black-color);
+    }
+
+    .login-header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -30px;
+        width: 30px;
+        height: 30px;
+        border-top-right-radius: 50%;
+        background: transparent;
+        box-shadow: 15px 0 0 0 var(--primary-color);
+    }
+
+    .login-header::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: -30px;
+        width: 30px;
+        height: 30px;
+        border-top-left-radius: 50%;
+        background: transparent;
+        box-shadow: -15px 0 0 0 var(--primary-color); /* Removed space before --primary-color */
+    }
+
+.input_box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+}
+
+.input-field {
+    width: 100%;
+    height: 55px;
+    font-size: 16px;
+    background: transparent;
+    color: var(--second-color);
+    padding-inline: 20px 50px;
+    border: 2px solid var(--primary-color);
+    border-radius: 30px;
+    outline: none;
+    
+}
+
+#user {
+    margin-bottom: 10px;
+}
+
+.label {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    transition: 0.2s;
+}
+
+.input-field:focus + .label,
+.input-field:valid + .label {
+    /* Added missing closing brace here */
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    font-size: 14px;
+    background-color: var(--primary-color);
+    border-radius: 30px;
+    color: var(--black-color);
+    padding: 0 10px;
+}
+/* Closed the missing brace */
+.icon {
+    position: absolute;
+    top: 18px;
+    right: 25px;
+    font-size: 20px;
+}
+
+
+
+.input-submit {
+    width: 100%;
+    height: 50px;
+    background: #ececec;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+    .input-submit:hover {
+        background: var(--second-color);
+    }
+
+
+
+@media only screen and (max-width: 564px) {
+    .wrapper {
+        padding: 20px;
+    }
+
+    .login_box {
+        padding: 7.5em 1.5em 4em 1.5em;
+    }
+}
+
+
+
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: 'Arial', sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+    .styled-table thead tr {
+        background-color: #009879;
+        color: #ffffff;
+        text-align: left;
+    }
+
+    .styled-table th, .styled-table td {
+        padding: 12px 15px;
+    }
+
+    .styled-table tbody tr {
+        border-bottom: 1px solid #dddddd;
+    }
+
+        .styled-table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        .styled-table tbody tr:last-of-type {
+            border-bottom: 2px solid #009879;
+        }
+
+        .styled-table tbody tr.active-row {
+            font-weight: bold;
+            color: #009879;
+        }
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+.btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+    .btn-danger:hover {
+        background-color: #c82333;
+    }
+
+.inline-form {
+    display: inline;
+}
+
+.Editar {
+    width: -webkit-fill-available;
+}
+.Eliminar {
+    width: -webkit-fill-available;
+}
+.Detalles {
+    width: -webkit-fill-available;
+}
+.GETdata {
+    background-color: #ced4da;
+}
+
+
+/* css para formularios */
+
+.wrapper-F {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 82.5vh;
+    /*background-color: rgba(0, 0, 0, 0.2);*/
+}
+
+.F_box {
+    position: relative;
+    width: 450px;
+    backdrop-filter: blur(25px);
+    border: 2px solid var(--primary-color);
+    border-radius: 15px;
+    padding: 8.5em 2.5em 5em 2.5em;
+    color: var(--second-color);
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
+    /*height: 800px; */ 
+}
+
+.F-header {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+    width: 240px;
+    height: 90px;
+    border-radius: 0 0 20px 20px;
+}
+
+    .F-header span {
+        font-size: 30px;
+        color: var(--black-color);
+    }
+
+    .F-header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -30px;
+        width: 50px;
+        height: 30px;
+        border-top-right-radius: 50%;
+        background: transparent;
+        box-shadow: 15px 0 0 0 var(--primary-color);
+    }
+
+    .F-header::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: -30px;
+        width: 30px;
+        height: 30px;
+        border-top-left-radius: 50%;
+        background: transparent;
+        box-shadow: -15px 0 0 0 var(--primary-color); /* Removed space before --primary-color */
+    }
+
+.input_box-F {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+}
+
+.input-field-F {
+    width: 100%;
+    height: 55px;
+    font-size: 16px;
+    background: transparent;
+    color: var(--second-color);
+    padding-inline: 20px 50px;
+    border: 2px solid var(--primary-color);
+    border-radius: 30px;
+    outline: none;
+}
+
+
+.label-F {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    transition: 0.2s;
+}
+
+.input-field-F:focus ~ .label-F,
+.input-field-F:valid ~ .label-F {
+    /* Added missing closing brace here */
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    font-size: 14px;
+    background-color: var(--primary-color);
+    border-radius: 30px;
+    color: var(--black-color);
+    padding: 0 10px;
+}
+.F{
+    position:relative;
+    top: -45px;
+}
+
+
+/* foter*/
+.foter {
+    position: absolute;
+    /* bottom: 0; */
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+}
+
+
+
+
+
+/* tablas */
+.wrapper-T {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 82.5vh;
+    /*background-color: rgba(0, 0, 0, 0.2);*/
+}
+
+.T_box {
+    position: relative;
+    width: 90%; /* Aumentado para adaptarse mejor a tablas */
+    max-width: 1200px; /* Limita el ancho máximo */
+    backdrop-filter: blur(25px);
+    border: 2px solid var(--primary-color);
+    border-radius: 15px;
+    padding: 4em 2.5em 2.5em 2.5em; /* Ajustado para adaptarse mejor a tablas */
+    color: var(--second-color);
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
+    /*height: 800px; */
+}
+
+.T-header {
+    position: absolute;
+    top: -2px; /* Ajustado para que el header quede encima de la tabla */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+    width: 260px; /* Aumentado para adaptarse mejor a tablas */
+    height: 50px;
+    border-radius: 0 0 20px 20px;
+}
+
+    .T-header span {
+        font-size: 20px;
+        color: var(--black-color);
+    }
+
+    .T-header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -30px;
+        width: 50px;
+        height: 30px;
+        border-top-right-radius: 50%;
+        background: transparent;
+        box-shadow: 15px 0 0 0 var(--primary-color);
+    }
+
+    .T-header::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: -30px;
+        width: 30px;
+        height: 30px;
+        border-top-left-radius: 50%;
+        background: transparent;
+        box-shadow: -15px 0 0 0 var(--primary-color);
+    }

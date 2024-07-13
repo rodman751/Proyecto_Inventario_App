@@ -20,7 +20,7 @@ namespace Inventario.MVC
                         config.Cookie.Name = "auth_token";
                         config.LoginPath = "/Login/Index";
                         config.AccessDeniedPath = "/Home/AccessDenied";
-                        config.ExpireTimeSpan = TimeSpan.FromMinutes(1);
+                        config.ExpireTimeSpan = TimeSpan.FromMinutes(5);
                     });
             
 

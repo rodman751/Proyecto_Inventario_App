@@ -1,72 +1,74 @@
 ﻿@model Inventario.Entidades.Producto
 
-<h4>Producto</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit" class="needs-validation" novalidate>
+<link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+<div class="wrapper-F">
+    <div class="F_box">
+        <div class="F-header">
+            <span>Editar Producto</span>
+        </div>
+        <form asp-action="Edit" class="F">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="ID_Producto" class="control-label" hidden></label>
-                <input asp-for="ID_Producto" class="form-control" required hidden/>
+            <div class="input_box-F" hidden>
+                <input asp-for="ID_Producto" class="input-field-F" required />
+                <label for="ID_Producto" class="label-F" hidden>ID</label>
                 <span asp-validation-for="ID_Producto" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Codigo" class="control-label"></label>
-                <input asp-for="Codigo" class="form-control" required />
+            <div class="input_box-F">
+                <input asp-for="Codigo" type="text" class="input-field-F" required />
+                <label for="Codigo" class="label-F">Código</label>
+                <i class="bx bx-barcode icon"></i>
                 <span asp-validation-for="Codigo" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" required />
+            <div class="input_box-F">
+                <input asp-for="Nombre" class="input-field-F" required />
+                <label for="Nombre" class="label-F">Nombre</label>
+                <i class="bx bx-font icon"></i>
                 <span asp-validation-for="Nombre" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Descripcion" class="control-label"></label>
-                <input asp-for="Descripcion" class="form-control" required />
+            <div class="input_box-F">
+                <input asp-for="Descripcion" class="input-field-F" required />
+                <label for="Descripcion" class="label-F">Descripción</label>
+                <i class="bx bx-comment-detail icon"></i>
                 <span asp-validation-for="Descripcion" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="GravaIVA" /> @Html.DisplayNameFor(model => model.GravaIVA)
-                </label>
+            <div class="input_box-F">
+                <input class="input-field-F" asp-for="GravaIVA" />
+                <label class="label-F">@Html.DisplayNameFor(model => model.GravaIVA)</label>
             </div>
-            <div class="form-group">
-                <label asp-for="Costo" class="control-label"></label>
-                <input asp-for="Costo" class="form-control" required />
+            <div class="input_box-F">
+                <input asp-for="Costo" class="input-field-F" required />
+                <label for="Costo" class="label-F">Costo</label>
+                <i class="bx bx-money icon"></i>
                 <span asp-validation-for="Costo" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="PVP" class="control-label"></label>
-                <input asp-for="PVP" class="form-control" required disabled />
+            <div class="input_box-F" hidden>
+                <input asp-for="PVP" class="input-field-F" required disabled />
+                <label for="PVP" class="label-F">PVP</label>
+                <i class="bx bx-money icon"></i>
                 <span asp-validation-for="PVP" class="text-danger"></span>
             </div>
-            @* <div class="form-group">
-                <label asp-for="Estado" class="control-label"></label>
-                <input asp-for="Estado" class="form-control" required />
-                <span asp-validation-for="Estado" class="text-danger"></span>
-            </div> *@
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Estado" /> @Html.DisplayNameFor(model => model.Estado)
-                </label>
+            <div class="input_box-F">
+                <input class="input-field-F" asp-for="Estado" />
+                <label class="label-F">@Html.DisplayNameFor(model => model.Estado)</label>
             </div>
-            <div class="form-group">
-                <label asp-for="StockProducto" class="control-label"></label>
-                <input asp-for="StockProducto" class="form-control" required />
+            <div class="input_box-F">
+                <input asp-for="StockProducto" type="number" class="input-field-F" required />
+                <label for="StockProducto" class="label-F">StockProducto</label>
+                <i class="bx bx-package icon"></i>
                 <span asp-validation-for="StockProducto" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <div class="input_box-F">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+            <div class="input_box-F">
+                <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
             </div>
         </form>
+
     </div>
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
