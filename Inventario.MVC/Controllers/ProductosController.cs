@@ -18,10 +18,10 @@ namespace Inventario.MVC.Controllers
             _notifyService = notyfService;
         }
         // GET: ProductosController
-        [Authorize(Roles = "Administrador Compras,Bodeguero Inventario")]
+        //[Authorize(Roles = "Administrador Compras,Bodeguero Inventario")]
         public ActionResult Index()
         {
-            
+                
             var data = CRUD<Producto>.Read(Productos);
             return View(data);
         }

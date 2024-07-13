@@ -1,47 +1,57 @@
 ﻿@model Inventario.Entidades.DetalleAjusteProducto
 
-<h4>DetalleAjusteProducto</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+<div class="container">
+    <div class="header">
+        <h1>Crear Detalle Ajuste Producto</h1>
+        <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+    </div>
+    <div class="form-container">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="ID_DetalleAjuste" class="control-label" hidden></label>
-                <input asp-for="ID_DetalleAjuste" class="form-control" value="0" hidden />
+
+            <div class="input_box">
+                <input asp-for="ID_DetalleAjuste" class="input-field" value="0" hidden />
                 <span asp-validation-for="ID_DetalleAjuste" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="ID_Ajuste" class="control-label" hidden></label>
-                <input asp-for="ID_Ajuste" class="form-control" id="ID_Ajuste" name="ID_Ajuste" value=""  hidden   />
+
+            <div class="input_box">
+                <input asp-for="ID_Ajuste" class="input-field" id="ID_Ajuste" name="ID_Ajuste" value="" hidden />
                 <span asp-validation-for="ID_Ajuste" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="ID_Producto" class="control-label"></label>
-                <select asp-for="ID_Producto" class="form-control" asp-items="ViewBag.Productos"></select>
+
+            <div class="input_box">
+                <i class="bx bx-barcode icon"></i>
+                <select asp-for="ID_Producto" class="input-field form-controll" asp-items="ViewBag.Productos"></select>
+                <label asp-for="ID_Producto" class="label">Selecciona el Producto</label>
                 <span asp-validation-for="ID_Producto" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="CantidadAjustada" class="control-label"></label>
-                <input asp-for="CantidadAjustada" class="form-control" />
+
+            <div class="input_box">
+                <i class="bx bx-font icon"></i>
+                <input asp-for="CantidadAjustada" class="input-field form-control" />
+                <label asp-for="CantidadAjustada" class="label">Cantidad Ajustada</label>
                 <span asp-validation-for="CantidadAjustada" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="RazonAjuste" class="control-label"></label>
-                <input asp-for="RazonAjuste" class="form-control" />
+
+            <div class="input_box">
+                <i class="bx bx-comment-detail icon"></i>
+                <input asp-for="RazonAjuste" class="input-field form-control" />
+                <label asp-for="RazonAjuste" class="label">Razón del Ajuste</label>
                 <span asp-validation-for="RazonAjuste" class="text-danger"></span>
             </div>
-            <div class="form-group">
+
+            <div class="input_box">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+    <div>
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
 </div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>

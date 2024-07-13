@@ -7,56 +7,45 @@
     var userRole = user.FindFirst("Rol")?.Value;
 }
 
-<p>
-    <a asp-action="NewAjuste" class="btn btn-primary" id="Inventario">Crear Ajuste</a>
-</p>
-<table class="table table-striped">
-    <thead class="table-dark">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ID_Ajuste)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumeroAjuste)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Fecha)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Impreso)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ID_Ajuste)
-            </td>
-            <td>
-                @* @Html.DisplayFor(modelItem => item.NumeroAjuste) *@
-                    @Html.ActionLink(@Html.DisplayTextFor(modelItem => item.NumeroAjuste).ToString(), "GetDetallesSQL", new { id = item.ID_Ajuste }, new { @class = "btn btn-info", id = "actionLink" })
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fecha)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Impreso)
-            </td>
-
-        </tr>
-}
-    </tbody>
-    
-</table>
-<script>
+<div class="wrapper-T">
+    <div class="T_box">
+        <div class="T-header">
+            <span>Ajustes de Inventario</span>
+        </div>
+        <div class="header">
+            <a asp-action="NewAjuste" class="btn btn-primary" id="Inventario">Crear Ajuste</a>
+        </div>
+        <div class="table-responsive">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.ID_Ajuste)</th>
+                        <th>@Html.DisplayNameFor(model => model.NumeroAjuste)</th>
+                        <th>@Html.DisplayNameFor(model => model.Fecha)</th>
+                        <th>@Html.DisplayNameFor(model => model.Descripcion)</th>
+                        <th>@Html.DisplayNameFor(model => model.Impreso)</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.ID_Ajuste)</td>
+                            <td>
+                                @Html.ActionLink(@Html.DisplayTextFor(modelItem => item.NumeroAjuste).ToString(), "GetDetallesSQL", new { id = item.ID_Ajuste }, new { @class = "btn GETdata", id = "actionLink" })
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.Fecha)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Descripcion)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Impreso)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@* <script>
     var userRole = '@userRole';
     const inventario = document.getElementById("Inventario");
     const actionLink = document.getElementById("actionLink");
@@ -84,4 +73,4 @@
         actionLink.style.pointerEvents = "auto"; // Habilita el clic
         actionLink.style.cursor = "pointer"; // Cambia el cursor
     }
-</script>
+</script> *@

@@ -1,83 +1,64 @@
 ﻿@model IEnumerable<Inventario.Entidades.DTO.DetalleAjusteProductoDTO>
+<link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 
 
+<div class="container">
+    <div class="header">
+        <h1>Detalle Ajuste Producto</h1>
+        <a asp-action="CreateDetalleAjusteProducto" asp-route-id="@ViewBag.ID_Ajuste" class="btn btn-primary">Crear Nuevo</a>
+        <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+    </div>
 
-<p>
-    <a asp-action="CreateDetalleAjusteProducto" asp-route-id="@ViewBag.ID_Ajuste" class="btn btn-primary">Create New</a>
-    <a asp-action="Index"  class="btn btn-primary">Regresar</a>
+    <div class="form-container">
+        <form asp-controller="Reporte" asp-action="PrevisualizarPDF" method="post">
+            <div class="input_box">
+                <input type="text" class="input-field" id="descripcion" name="descripcion" required />
+                <label for="descripcion" class="label">Descripción del Ajuste</label>
+                <i class="bx bx-comment-detail icon"></i>
+            </div>
+            <div class="input_box">
+                <button type="submit" class="btn btn-primary">Generar PDF</button>
+            </div>
+        </form>
+    </div>
 
-    <form asp-controller="Reporte" asp-action="PrevisualizarPDF" method="post">
-        <div class="form-group">
-            <label for="descripcion">Descripción del Ajuste:</label>
-            <input type="text" class="form-control" id="descripcion" name="descripcion" required />
-        </div>
-        <button type="submit" class="btn btn-primary">Generar PDF</button>
-    </form>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Fecha)</th>
+                <th>@Html.DisplayNameFor(model => model.ID_DetalleAjuste)</th>
+                <th>@Html.DisplayNameFor(model => model.ID_Producto)</th>
+                <th>@Html.DisplayNameFor(model => model.NombreProducto)</th>
+                <th>@Html.DisplayNameFor(model => model.CodigoProducto)</th>
+                <th>@Html.DisplayNameFor(model => model.CantidadAjustada)</th>
+                <th>@Html.DisplayNameFor(model => model.RazonAjuste)</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Fecha)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ID_DetalleAjuste)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ID_Producto)</td>
+                    <td>@Html.DisplayFor(modelItem => item.NombreProducto)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CodigoProducto)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CantidadAjustada)</td>
+                    <td>@Html.DisplayFor(modelItem => item.RazonAjuste)</td>
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.ID_DetalleAjuste }, new { @class = "btn btn-primary Editar" }) 
+                        @Html.ActionLink("Detalles", "Details", new { id = item.ID_DetalleAjuste }, new { @class = "btn btn-info Detalles" }) 
+                        <form asp-action="Delete" asp-route-id="@item.ID_DetalleAjuste" method="post" style="display:inline;" onsubmit="return confirmDelete();">
+                            <button type="submit" class="btn btn-danger Eliminar">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
-
-</p>
-<table class="table">
-    <thead class="table-dark">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Fecha)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ID_DetalleAjuste)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ID_Producto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NombreProducto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CodigoProducto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CantidadAjustada)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RazonAjuste)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fecha)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ID_DetalleAjuste)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ID_Producto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreProducto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CodigoProducto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CantidadAjustada)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RazonAjuste)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.ID_DetalleAjuste }, new { @class = "btn btn-primary" }) |
-                @Html.ActionLink("Details", "Details", new {  id=item.ID_DetalleAjuste}, new { @class = "btn btn-info" })|
-                    <form asp-action="Delete" asp-route-id="@item.ID_DetalleAjuste" method="post" style="display:inline;" onsubmit="return confirmDelete();">
-                        <button type="submit" class="btn btn-danger">Eliminar</button>
-                    </form>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
 <script>
     function confirmDelete() {
         return confirm("¿Estás seguro de que deseas eliminar?");
