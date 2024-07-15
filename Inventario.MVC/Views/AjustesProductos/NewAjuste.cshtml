@@ -2,42 +2,46 @@
 
 <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 
-<div class="container">
-    <div class="header">
-        <h1>Ajuste de Producto</h1>
-        <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
-    </div>
-    <div class="form-container">
-        <form asp-action="CreateNewAjuste">
+<div class="wrapper-F">
+    <div class="F_box">
+        <div class="F-header">
+            <span>Crear AjusteProducto</span>
+        </div>
+        <form asp-action="CreateNewAjuste" class="F">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="input_box">
-                <input asp-for="ID_Ajuste" class="input-field" value="0" hidden />
+            <div class="input_box-F">
+                <input asp-for="ID_Ajuste" class="input-field-F" value="0" hidden />
+                <label for="ID_Ajuste" class="label-F" hidden>ID</label>
                 <span asp-validation-for="ID_Ajuste" class="text-danger"></span>
             </div>
-            <div class="input_box">
-                <input asp-for="NumeroAjuste" class="input-field" value="@ViewBag.NewNumeroAjuste" readonly />
-                <label asp-for="NumeroAjuste" class="label">Número de Ajuste</label>
+            <div class="input_box-F">
+                <input asp-for="NumeroAjuste" class="input-field-F" value="@ViewBag.NewNumeroAjuste" id="NumeroAjuste" />
+                <label for="NumeroAjuste" class="label-F">Número de Ajuste</label>
                 <i class="bx bx-hash icon"></i>
                 <span asp-validation-for="NumeroAjuste" class="text-danger"></span>
             </div>
-            <div class="input_box">
-                <input asp-for="Fecha" class="input-field" />
-                <label asp-for="Fecha" class="label">Fecha</label>
+            <div class="input_box-F">
+                <input asp-for="Fecha" class="input-field-F" value="null"  />
+                <label for="Fecha" class="label-F">Fecha</label>
                 <i class="bx bx-calendar icon"></i>
                 <span asp-validation-for="Fecha" class="text-danger"></span>
             </div>
-            <div class="input_box">
-                <input asp-for="Descripcion" class="input-field" />
-                <label asp-for="Descripcion" class="label">Descripción</label>
+            <div class="input_box-F">
+                <input asp-for="Descripcion" class="input-field-F" required />
+                <label for="Descripcion" class="label-F">Descripción</label>
                 <i class="bx bx-comment-detail icon"></i>
                 <span asp-validation-for="Descripcion" class="text-danger"></span>
             </div>
-            <div class="input_box" hidden>
-                <input asp-for="Impreso" class="input-field" hidden />
+            <div class="input_box-F" hidden>
+                <input asp-for="Impreso" class="input-field-F" hidden />
+                <label for="Impreso" class="label-F" hidden>Impreso</label>
                 <span asp-validation-for="Impreso" class="text-danger"></span>
             </div>
-            <div class="input_box">
+            <div class="input_box-F">
                 <input type="submit" value="Crear" class="btn btn-primary" />
+            </div>
+            <div class="input_box-F">
+                <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
             </div>
         </form>
     </div>
@@ -45,5 +49,6 @@
         @{
             await Html.RenderPartialAsync("_ValidationScriptsPartial");
         }
+       
     }
 </div>

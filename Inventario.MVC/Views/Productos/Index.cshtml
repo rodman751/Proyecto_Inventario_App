@@ -1,5 +1,9 @@
-﻿@model IEnumerable<Inventario.Entidades.Producto>
+﻿@* @model IEnumerable<Inventario.Entidades.Producto> *@
+@* @using X.PagedList.Mvc.Core; *@
 
+@using X.PagedList.Mvc.Core
+@using X.PagedList
+@model IPagedList<Inventario.Entidades.Producto>
 <div class="wrapper-T">
     <div class="T_box">
         <div class="T-header">
@@ -12,15 +16,15 @@
             <table class="styled-table">
                 <thead>
                     <tr>
-                        <th>@Html.DisplayNameFor(model => model.ID_Producto)</th>
-                        <th>@Html.DisplayNameFor(model => model.Codigo)</th>
-                        <th>@Html.DisplayNameFor(model => model.Nombre)</th>
-                        <th>@Html.DisplayNameFor(model => model.Descripcion)</th>
-                        <th>@Html.DisplayNameFor(model => model.GravaIVA)</th>
-                        <th>@Html.DisplayNameFor(model => model.Costo)</th>
-                        <th>@Html.DisplayNameFor(model => model.PVP)</th>
-                        <th>@Html.DisplayNameFor(model => model.Estado)</th>
-                        <th>@Html.DisplayNameFor(model => model.StockProducto)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().ID_Producto)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().Codigo)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().Nombre)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().Descripcion)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().GravaIVA)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().Costo)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().PVP)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().Estado)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().StockProducto)</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -47,6 +51,9 @@
                     }
                 </tbody>
             </table>
+        </div>
+        <div class="pagination-container">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
         </div>
     </div>
 </div>

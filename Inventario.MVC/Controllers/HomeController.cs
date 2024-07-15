@@ -13,7 +13,7 @@ namespace Inventario.MVC.Controllers
         {
             _logger = logger;
         }
-
+        //[Authorize]
         public IActionResult Index()
         {
             return View();
@@ -33,6 +33,7 @@ namespace Inventario.MVC.Controllers
         
         public IActionResult AccessDenied()
         {
+            ViewData["NoLayout"] = true;
             return View();
         }
 

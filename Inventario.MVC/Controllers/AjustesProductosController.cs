@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.OpenApi.Writers;
+using X.PagedList.Extensions;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Inventario.MVC.Controllers
@@ -34,10 +35,11 @@ namespace Inventario.MVC.Controllers
         }
         // GET: AjustesProductosController
         //[Authorize(Roles= "Administrador Compras")]
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-
-            var data = CRUD<AjusteProducto>.Read(urlApi);
+            int pageNumber = page ?? 1;
+            int pageSize = 5;
+            var data = CRUD<AjusteProducto>.Read(urlApi).ToPagedList(pageNumber, pageSize);
             _notifyService.Success("Datos cargados correctamente");
             return View(data);
         }
