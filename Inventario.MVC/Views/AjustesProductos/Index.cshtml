@@ -1,7 +1,10 @@
-﻿@model IEnumerable<Inventario.Entidades.AjusteProducto>
+﻿@* @model IEnumerable<Inventario.Entidades.AjusteProducto> *@
 @using Microsoft.AspNetCore.Identity
 @using System.Security.Claims
 
+@using X.PagedList.Mvc.Core
+@using X.PagedList
+@model IPagedList<Inventario.Entidades.AjusteProducto>
 @{
     var user = User;
     var userRole = user.FindFirst("Rol")?.Value;
@@ -19,11 +22,11 @@
             <table class="styled-table">
                 <thead>
                     <tr>
-                        <th>@Html.DisplayNameFor(model => model.ID_Ajuste)</th>
-                        <th>@Html.DisplayNameFor(model => model.NumeroAjuste)</th>
-                        <th>@Html.DisplayNameFor(model => model.Fecha)</th>
-                        <th>@Html.DisplayNameFor(model => model.Descripcion)</th>
-                        <th>@Html.DisplayNameFor(model => model.Impreso)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().ID_Ajuste)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().NumeroAjuste)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().Fecha)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().Descripcion)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().Impreso)</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -42,6 +45,9 @@
                     }
                 </tbody>
             </table>
+        </div>
+        <div class="pagination-container">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
         </div>
     </div>
 </div>

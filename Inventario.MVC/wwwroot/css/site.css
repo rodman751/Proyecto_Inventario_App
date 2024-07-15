@@ -300,13 +300,13 @@ a {
     align-items: center;
     justify-content: center;
     background-color: var(--primary-color);
-    width: 240px;
-    height: 90px;
+    width: 340px;
+    height: 70px;
     border-radius: 0 0 20px 20px;
 }
 
     .F-header span {
-        font-size: 30px;
+        font-size: 20px;
         color: var(--black-color);
     }
 
@@ -456,4 +456,29 @@ a {
         border-top-left-radius: 50%;
         background: transparent;
         box-shadow: -15px 0 0 0 var(--primary-color);
+    }
+
+    /** paginacion **/
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+    .pagination-container .PagedList-skipToNext,
+    .pagination-container .PagedList-skipToLast,
+    .pagination-container .PagedList-skipToPrevious,
+    .pagination-container .PagedList-skipToFirst,
+    .pagination-container .PagedList-pageNumber {
+        margin: 0 5px;
+        padding: 10px;
+        border: 1px solid var(--primary-color);
+        border-radius: 5px;
+        color: var(--primary-color);
+        text-decoration: none;
+    }
+
+    .pagination-container .PagedList-currentPage {
+        font-weight: bold;
+        color: var(--second-color);
     }

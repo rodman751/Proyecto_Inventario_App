@@ -3,50 +3,56 @@
 
 <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 
-<div class="container">
-    <div class="header">
-        <h1>Editar Detalle Ajuste Producto</h1>
-        <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
-    </div>
-    <div class="form-container">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="wrapper-F">
+    <div class="F_box">
+        <div class="F-header">
+            <span>Editar Detalle Ajuste Producto</span>
+            
+        </div>
+        <div class="form-container">
+            <form asp-action="Edit" class="F">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="input_box">
-                <input asp-for="ID_DetalleAjuste" class="input-field" hidden />
-                <span asp-validation-for="ID_DetalleAjuste" class="text-danger"></span>
-            </div>
+                <div class="input_box-F">
+                    <input asp-for="ID_DetalleAjuste" class="input-field-F" hidden />
+                    <span asp-validation-for="ID_DetalleAjuste" class="text-danger"></span>
+                </div>
 
-            <div class="input_box">
-                <input asp-for="ID_Ajuste" class="input-field" hidden />
-                <span asp-validation-for="ID_Ajuste" class="text-danger"></span>
-            </div>
+                <div class="input_box-F">
+                    <input asp-for="ID_Ajuste" class="input-field-F" hidden />
+                    <span asp-validation-for="ID_Ajuste" class="text-danger"></span>
+                </div>
 
-            <div class="input_box">
-                <i class="bx bx-barcode icon"></i>
-                <select asp-for="ID_Producto" class="input-field form-control" asp-items="ViewBag.Productos"></select>
-                <label asp-for="ID_Producto" class="label">Selecciona el Producto</label>
-                <span asp-validation-for="ID_Producto" class="text-danger"></span>
-            </div>
+                <div class="input_box-F">
+                    <i class="bx bx-barcode icon"></i>
+                    <select asp-for="ID_Producto" class="input-field-F form-control" asp-items="ViewBag.Productos"></select>
+                    <label asp-for="ID_Producto" class="label-F">Selecciona el Producto</label>
+                    <span asp-validation-for="ID_Producto" class="text-danger"></span>
+                </div>
 
-            <div class="input_box">
-                <i class="bx bx-font icon"></i>
-                <input asp-for="CantidadAjustada" class="input-field form-control" />
-                <label asp-for="CantidadAjustada" class="label">Cantidad Ajustada</label>
-                <span asp-validation-for="CantidadAjustada" class="text-danger"></span>
-            </div>
+                <div class="input_box-F">
+                    <i class="bx bx-font icon"></i>
+                    <input asp-for="CantidadAjustada" class="input-field-F form-control" />
+                    <label asp-for="CantidadAjustada" class="label-F">Cantidad Ajustada</label>
+                    <span asp-validation-for="CantidadAjustada" class="text-danger"></span>
+                </div>
 
-            <div class="input_box">
-                <i class="bx bx-comment-detail icon"></i>
-                <input asp-for="RazonAjuste" class="input-field form-control" />
-                <label asp-for="RazonAjuste" class="label">Razón del Ajuste</label>
-                <span asp-validation-for="RazonAjuste" class="text-danger"></span>
-            </div>
+                <div class="input_box-F">
+                    <i class="bx bx-comment-detail icon"></i>
+                    <input asp-for="RazonAjuste" class="input-field-F form-control" />
+                    <label asp-for="RazonAjuste" class="label-F">Razón del Ajuste</label>
+                    <span asp-validation-for="RazonAjuste" class="text-danger"></span>
+                </div>
 
-            <div class="input_box">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+                <div class="input_box-F">
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                </div>
+                <div class="input_box-F">
+                    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+                </div>
+                
+            </form>
+        </div>
     </div>
 </div>
 
