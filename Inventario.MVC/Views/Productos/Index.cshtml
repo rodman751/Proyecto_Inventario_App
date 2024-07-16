@@ -1,7 +1,4 @@
-﻿@* @model IEnumerable<Inventario.Entidades.Producto> *@
-@* @using X.PagedList.Mvc.Core; *@
-
-@using X.PagedList.Mvc.Core
+﻿@using X.PagedList.Mvc.Core
 @using X.PagedList
 @model IPagedList<Inventario.Entidades.Producto>
 <div class="wrapper-T">
@@ -10,7 +7,10 @@
             <span>Lista de Productos</span>
         </div>
         <div class="header">
-            <a asp-action="Create" asp-controller="Productos" class="btn btn-primary">Crear Nuevo</a>
+            @* <a asp-action="_CreatePartial" asp-controller="Productos" class="btn btn-primary">Crear Nuevo</a> *@
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
+                Crear Nuevo
+            </button>
         </div>
         <div class="table-responsive">
             <table class="styled-table">
@@ -42,7 +42,9 @@
                             <td>@Html.DisplayFor(modelItem => item.Estado)</td>
                             <td>@Html.DisplayFor(modelItem => item.StockProducto)</td>
                             <td>
-                                <a asp-action="Edit" asp-route-id="@item.ID_Producto" class="btn btn-primary Editar">Editar</a>
+                                @* <a asp-action="_EditPartial" asp-route-id="@item.ID_Producto" class="btn btn-primary Editar">Editar</a> *@
+                                <a asp-action="EditPartial" data-id="@item.ID_Producto" class="btn btn-primary Editar" data-toggle="modal" data-target="#editModal" id="openCreateModal">Editar</a>
+
                                 <form asp-action="Delete" asp-route-id="@item.ID_Producto" method="post" class="inline-form" onsubmit="return confirmDelete();">
                                     <button type="submit" class="btn btn-danger Eliminar">Eliminar</button>
                                 </form>
@@ -53,12 +55,60 @@
             </table>
         </div>
         <div class="pagination-container">
+           
             @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
         </div>
     </div>
 </div>
-<script>
-    function confirmDelete() {
-        return confirm("¿Estás seguro de que deseas eliminar este producto?");
-    }
-</script>
+
+
+<!-- Modal para Create -->
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modalcontent2">
+            
+            <div class="modal-body">
+                @await Html.PartialAsync("_CreatePartial", new Inventario.Entidades.Producto())
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Edit -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modalcontent2">
+
+            <div class="modal-body">
+                <!-- El contenido del modal se cargará aquí dinámicamente -->
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    
+    <script>
+        function confirmDelete() {
+            return confirm("¿Estás seguro de que deseas eliminar este producto?");
+        }
+
+        $(document).ready(function () {
+            $('#openCreateModal').on('click', function () {
+                var productId = $(this).data('id'); // Obtener el ID del producto desde el atributo data-id del botón
+
+                fetch('@Url.Action("EditPartial", "Productos")?id=' + productId)
+                    .then(response => response.text())
+                    .then(data => {
+                        $('#editModal .modal-body').html(data);
+                        $('#editModal').modal('show');
+                    })
+                    .catch(error => console.error('Error al obtener datos del servidor:', error));
+            });
+        });
+    </script>
+
+}
+
+
