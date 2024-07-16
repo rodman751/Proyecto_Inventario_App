@@ -17,7 +17,7 @@
         </div>
         <div class="header">
           @*   <a asp-action="NewAjuste" class="btn btn-primary" id="Inventario">Crear Ajuste</a> *@
-            <button type="button" id="openCreateModal" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
+            <button type="button" id="openCreateModal" class="btn2" data-toggle="modal" data-target="#createModal">
                 Nuevo Ajuste
             </button>
         </div>
@@ -49,9 +49,40 @@
                 </tbody>
             </table>
         </div>
-        <div class="pagination-container">
+       @*  <div class="pagination-container">
             @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+        </div> *@
+
+        <div class="pagination-container">
+            <ul class="pagination">
+                @{
+                    var prevPage = Model.PageNumber > 1 ? Model.PageNumber - 1 : 1;
+                    var nextPage = Model.PageNumber < Model.PageCount ? Model.PageNumber + 1 : Model.PageCount;
+                }
+                <li class="page-item @(Model.HasPreviousPage ? "" : "disabled")">
+                    <a class="page-link" href="@Url.Action("Index", new { page = prevPage })" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions
+           {
+               LiElementClasses = new string[] { "page-item" },
+               PageClasses = new string[] { "page-link" },
+               DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+               DisplayLinkToLastPage = PagedListDisplayMode.Never,
+               DisplayLinkToPreviousPage = PagedListDisplayMode.Never,
+               DisplayLinkToNextPage = PagedListDisplayMode.Never,
+               MaximumPageNumbersToDisplay = 3
+           })
+                <li class="page-item @(Model.HasNextPage ? "" : "disabled")">
+                    <a class="page-link" href="@Url.Action("Index", new { page = nextPage })" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
         </div>
+
+
     </div>
 </div>
 

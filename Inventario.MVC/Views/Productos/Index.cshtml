@@ -8,7 +8,7 @@
         </div>
         <div class="header">
             @* <a asp-action="_CreatePartial" asp-controller="Productos" class="btn btn-primary">Crear Nuevo</a> *@
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
+            <button type="button" class="input-submit2" data-toggle="modal" data-target="#createModal">
                 Crear Nuevo
             </button>
         </div>
@@ -43,10 +43,10 @@
                             <td>@Html.DisplayFor(modelItem => item.StockProducto)</td>
                             <td>
                                 @* <a asp-action="_EditPartial" asp-route-id="@item.ID_Producto" class="btn btn-primary Editar">Editar</a> *@
-                                <a asp-action="EditPartial" data-id="@item.ID_Producto" class="btn btn-primary Editar" data-toggle="modal" data-target="#editModal" id="openCreateModal">Editar</a>
+                                <a asp-action="EditPartial" data-id="@item.ID_Producto" class="btn2" data-toggle="modal" data-target="#editModal" id="openCreateModal">Editar</a>
 
                                 <form asp-action="Delete" asp-route-id="@item.ID_Producto" method="post" class="inline-form" onsubmit="return confirmDelete();">
-                                    <button type="submit" class="btn btn-danger Eliminar">Eliminar</button>
+                                    <button type="submit" class="btn2">Eliminar</button>
                                 </form>
                             </td>
                         </tr>
@@ -55,8 +55,32 @@
             </table>
         </div>
         <div class="pagination-container">
-           
-            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+            <ul class="pagination">
+                @{
+                    var prevPage = Model.PageNumber > 1 ? Model.PageNumber - 1 : 1;
+                    var nextPage = Model.PageNumber < Model.PageCount ? Model.PageNumber + 1 : Model.PageCount;
+                }
+                <li class="page-item @(Model.HasPreviousPage ? "" : "disabled")">
+                    <a class="page-link" href="@Url.Action("Index", new { page = prevPage })" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions
+           {
+               LiElementClasses = new string[] { "page-item" },
+               PageClasses = new string[] { "page-link" },
+               DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+               DisplayLinkToLastPage = PagedListDisplayMode.Never,
+               DisplayLinkToPreviousPage = PagedListDisplayMode.Never,
+               DisplayLinkToNextPage = PagedListDisplayMode.Never,
+               MaximumPageNumbersToDisplay = 3
+           })
+                <li class="page-item @(Model.HasNextPage ? "" : "disabled")">
+                    <a class="page-link" href="@Url.Action("Index", new { page = nextPage })" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>

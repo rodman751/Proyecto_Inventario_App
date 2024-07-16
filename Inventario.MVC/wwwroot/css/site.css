@@ -30,6 +30,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    background-image: linear-gradient(120deg, #4f0088 0%, #000000 100%);
 }
 
 a {
@@ -59,6 +60,7 @@ a {
     padding: 7.5em 2.5em 4em 2.5em;
     color: var(--second-color);
     box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
+    background-color: white;
 }
 
 .login-header {
@@ -170,7 +172,7 @@ a {
 }
 
     .input-submit:hover {
-        background: var(--second-color);
+        background-color: #6c757d;
     }
 
 
@@ -225,30 +227,6 @@ a {
             color: #009879;
         }
 
-.btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.btn-primary {
-    background-color: #007bff;
-    color: #fff;
-}
-
-    .btn-primary:hover {
-        background-color: #0056b3;
-    }
-
-.btn-danger {
-    background-color: #dc3545;
-    color: #fff;
-}
-
-    .btn-danger:hover {
-        background-color: #c82333;
-    }
 
 .inline-form {
     display: inline;
@@ -256,6 +234,7 @@ a {
 
 .Editar {
     width: -webkit-fill-available;
+
 }
 .Eliminar {
     width: -webkit-fill-available;
@@ -266,11 +245,53 @@ a {
 .GETdata {
     background-color: #ced4da;
 }
+.input-submit2 {
+    width: 20%;
+    height: 50px;
+    bac kground: #ececec;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+    display: inline-block;
+    font-weight: 400;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.input-submit2:hover {
+    background-color: #6c757d;
+}
 
 
+.btn2 {
+    width: 100%;
+    padding: 10px;
+    background: #ececec;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+    color: black;
+    margin-bottom: 8px;
+    display: inline-block;
+    vertical-align: middle;
+    text-align:center;
+}
+.btn2:hover {
+    background-color: #6c757d;
+}
 /* css para formularios */
 
-.wrapper-F {
+    .wrapper-F {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -290,6 +311,7 @@ a {
     box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
     /*height: 800px; */
     background-color: white;
+    top: 75px;
 }
 
 .F-header {
@@ -414,6 +436,8 @@ a {
     color: var(--second-color);
     box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
     /*height: 800px; */
+    top: 75px;
+    background-color: white;
 }
 
 .T-header {
@@ -459,29 +483,59 @@ a {
         box-shadow: -15px 0 0 0 var(--primary-color);
     }
 
-    /** paginacion **/
+/** paginacion **/
 .pagination-container {
     display: flex;
     justify-content: center;
     margin-top: 20px;
 }
 
-    .pagination-container .PagedList-skipToNext,
-    .pagination-container .PagedList-skipToLast,
-    .pagination-container .PagedList-skipToPrevious,
-    .pagination-container .PagedList-skipToFirst,
-    .pagination-container .PagedList-pageNumber {
+    .pagination-container .pagination {
+        display: flex;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .pagination-container .page-item {
         margin: 0 5px;
-        padding: 10px;
+    }
+
+    .pagination-container .page-link {
+        padding: 10px 15px;
         border: 1px solid var(--primary-color);
         border-radius: 5px;
         color: var(--primary-color);
         text-decoration: none;
+        display: inline-block;
     }
 
-    .pagination-container .PagedList-currentPage {
-        font-weight: bold;
-        color: var(--second-color);
+        .pagination-container .page-link:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+    .pagination-container .page-item.active .page-link {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: white;
+    }
+
+    .pagination-container .disabled .page-link {
+        color: #6c757d;
+        pointer-events: none;
+        cursor: default;
+    }
+
+    .pagination-container .page-link:focus {
+        box-shadow: none;
+    }
+    .pagination-container .page-item.disabled .page-link {
+        color: #6c757d;
+        pointer-events: none;
+        cursor: not-allowed;
+        background-color: #fff;
+        border-color: #dee2e6;
     }
 
 

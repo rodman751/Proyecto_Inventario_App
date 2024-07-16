@@ -16,6 +16,7 @@ namespace Inventario.MVC.Controllers
         //[Authorize]
         public IActionResult Index()
         {
+            ViewData["NoLayout"] = true;
             return View();
         }
 
@@ -33,7 +34,6 @@ namespace Inventario.MVC.Controllers
         
         public IActionResult AccessDenied()
         {
-            ViewData["NoLayout"] = true;
             return View();
         }
 
