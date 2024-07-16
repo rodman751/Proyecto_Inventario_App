@@ -29,14 +29,14 @@
                         {
                             var userRole = User.FindFirst("Rol")?.Value;
 
-                            @if (userRole == "FAC-FACTURADOR")
+                            @if (userRole == "INV-ADMIN")
                             {
                                 <li class="nav-item">
                                     <a class="nav-link active text-black" asp-area="" asp-controller="AjustesProductos" asp-action="Index">Lista de Ajustes</a>
                                 </li>
                             }
 
-                            @if (userRole == "FAC-FACTURADOR")
+                            @if (userRole == "INV-ADMIN")
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-black" asp-area="" asp-controller="Productos" asp-action="Index">Productos</a>

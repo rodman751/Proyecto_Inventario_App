@@ -25,5 +25,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Inventario.Entidades\Inventario.Entidades.csproj" />
   </ItemGroup>
+	
+	
 
 </Project>
