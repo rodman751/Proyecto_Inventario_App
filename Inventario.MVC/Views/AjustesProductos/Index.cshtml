@@ -16,7 +16,10 @@
             <span>Ajustes de Inventario</span>
         </div>
         <div class="header">
-            <a asp-action="NewAjuste" class="btn btn-primary" id="Inventario">Crear Ajuste</a>
+          @*   <a asp-action="NewAjuste" class="btn btn-primary" id="Inventario">Crear Ajuste</a> *@
+            <button type="button" id="openCreateModal" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
+                Nuevo Ajuste
+            </button>
         </div>
         <div class="table-responsive">
             <table class="styled-table">
@@ -51,32 +54,39 @@
         </div>
     </div>
 </div>
-@* <script>
-    var userRole = '@userRole';
-    const inventario = document.getElementById("Inventario");
-    const actionLink = document.getElementById("actionLink");
-
-    if (userRole !== "Administrador Compras") {
-        inventario.disabled = true; // Deshabilitar el botón
-        inventario.style.cursor = "not-allowed";
-        inventario.onclick = function (event) {
-            event.preventDefault(); // Prevenir la acción predeterminada
-        };
-        inventario.style.pointerEvents = "none";
 
 
-        // Prevenir el clic en el enlace
-        actionLink.style.pointerEvents = "none"; // Deshabilita el clic
-        actionLink.style.cursor = "not-allowed"; // Cambia el cursor
-        actionLink.onclick = function (event) {
-            event.preventDefault(); // Prevenir la acción predeterminada
-        };
-    } else {
-        inventario.disabled = false; // Habilitar el botón
-        inventario.style.cursor = "pointer";
+<!-- Modal para Create -->
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modalcontent2">
 
-        // Habilitar el enlace
-        actionLink.style.pointerEvents = "auto"; // Habilita el clic
-        actionLink.style.cursor = "pointer"; // Cambia el cursor
-    }
-</script> *@
+            <div class="modal-body">
+                
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+
+    <script>
+
+        $(document).ready(function () {
+            $('#openCreateModal').on('click', function () {
+
+
+                fetch('@Url.Action("NewAjuste", "AjustesProductos")')
+                    .then(response => response.text())
+                    .then(data => {
+                        $('#createModal .modal-body').html(data);
+                        $('#createModal').modal('show');
+                    })
+                    .catch(error => console.error('Error al obtener datos del servidor:', error));
+            });
+        });
+    </script>
+
+}

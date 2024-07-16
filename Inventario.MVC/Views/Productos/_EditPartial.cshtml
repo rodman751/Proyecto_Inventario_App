@@ -6,7 +6,8 @@
         <div class="F-header">
             <span>Editar Producto</span>
         </div>
-        <form asp-action="Edit" class="F">
+        <form id="editForm" method="post" asp-action="Edit" asp-controller="Productos" asp-route-id="@Model.ID_Producto"  class="F">
+            <input type="hidden" asp-for="ID_Producto" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="input_box-F" hidden>
                 <input asp-for="ID_Producto" class="input-field-F" required />

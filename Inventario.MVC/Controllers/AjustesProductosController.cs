@@ -144,7 +144,7 @@ namespace Inventario.MVC.Controllers
             }
 
             ViewBag.NewNumeroAjuste = newNumeroAjuste;
-            return View();
+            return PartialView("_NewAjuste");
             
         }
 

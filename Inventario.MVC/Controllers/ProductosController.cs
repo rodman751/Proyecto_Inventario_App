@@ -35,9 +35,10 @@ namespace Inventario.MVC.Controllers
         }
 
         // GET: ProductosController/Create
-        public ActionResult Create()
+        public ActionResult _CreatePartial()
         {
-            return View();
+             return View();
+            //return PartialView("_CreatePartial");
         }
 
         // POST: ProductosController/Create
@@ -69,11 +70,12 @@ namespace Inventario.MVC.Controllers
         }
 
         // GET: ProductosController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult EditPartial(int id)
         {
             var data = CRUD<Producto>.Read_ById(Productos,id);
 
-            return View(data);
+            //return View(data);
+            return PartialView("_EditPartial", data);
         }
 
         // POST: ProductosController/Edit/5

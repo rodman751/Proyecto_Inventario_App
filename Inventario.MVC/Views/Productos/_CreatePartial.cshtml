@@ -5,7 +5,7 @@
         <div class="F-header">
             <span>Crear Producto</span>
         </div>
-        <form asp-action="Create" class="F">
+        <form id="createForm" method="post" asp-action="Create" asp-controller="Productos" class="F">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="input_box-F">
                 <input asp-for="ID_Producto" class="input-field-F" value="0" hidden />
@@ -60,7 +60,9 @@
                 <input type="submit" value="Crear" class="btn btn-primary" />
             </div>
             <div class="input_box-F">
-                <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+                @* <a asp-action="Index" class="btn btn-secondary">Cancelar</a> *@
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
             </div>
             
         </form>
