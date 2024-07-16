@@ -34,7 +34,7 @@ namespace Inventario.MVC.Controllers
             _notifyService = notyfService;
         }
         // GET: AjustesProductosController
-        //[Authorize(Roles= "Administrador Compras")]
+        //[Authorize(Roles= "INV-ADMIN")]
         public ActionResult Index(int? page)
         {
             int pageNumber = page ?? 1;
@@ -43,7 +43,7 @@ namespace Inventario.MVC.Controllers
             _notifyService.Success("Datos cargados correctamente");
             return View(data);
         }
-
+        //[Authorize(Roles= "INV-ADMIN")]
         public async Task<ActionResult> getDetallesSQL(int id)
         {
             var data = await CRUD<DetalleAjusteProductoDTO>.Read_ByIdSQLAsync(urlApi2, id);

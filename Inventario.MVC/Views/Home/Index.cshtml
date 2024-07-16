@@ -1,8 +1,143 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<h1 class="h">Inventario</h1>
+<div class="module-container">
+    <div class="module-content">
+        <p>> <span>MÓDULO</span>: "<i>Inventario</i>"</p>
+        <p>> <span>DESCRIPCIÓN</span>: "<i>Bienvenido al módulo de Inventario. Aquí puedes gestionar todos los aspectos relacionados con el inventario de tu empresa</i>"</p>
+        <p>> <span>FUNCIONALIDADES</span>:</p>
+        <ul class="functionality-list">
+            <li><b>Configuración Administración de Productos</b></li>
+            <li><b>Gestión Ajustes de Productos (Documento)</b></li>
+            <ul>
+                <li>Cabecera: descripción del ajuste, fecha, número automático con nomenclatura Ejemplo “AJUS-0001”</li>
+                <li>Detalle: selección de productos, atributos de stock, PVP, IVA, cantidad</li>
+                <li>Impresión del documento (PDF): una vez impreso no se puede modificar</li>
+            </ul>
+            <li><b>Reportes</b></li>
+            <ul>
+                <li>Reporte Kardex de un producto: movimientos y cálculo de stock</li>
+                <li>Reporte de Productos con Stock</li>
+            </ul>
+            <li><b>APIs</b></li>
+            <ul>
+                <li>Entrada: Listado de facturas de venta y compra detallado por productos</li>
+                <li>Salida: Listado de productos con stock, pista de auditoría del módulo</li>
+            </ul>
+            <li><b>Administración de productos</b>: código, nombre, descripción, IVA, costo, PVP, estado (activo/inactivo)</li>
+            <li><b>Inicio de sesión</b>: credenciales registradas y permisos asignados</li>
+        </ul>
+        <p>> <span>PÁGINAS RELACIONADAS</span>: [<a href="/">Página de inicio</a>, <a href="/productos">Productos</a>, <a href="/reportes">Reportes</a>...]</p>
+        <p>> <span>¡QUE TENGAS UN BUEN DÍA :-)</span></p>
+    </div>
 </div>
+<style>
+    .module-container {
+        background: rgba(0, 0, 0, 0);
+        width: 70vw;
+        position: relative;
+        top: 27rem;
+        transform: translateY(-50%);
+        margin: 0 auto;
+        padding: 30px 30px 10px;
+        box-shadow: 0 0 150px -20px rgba(0, 0, 0, 0.5);
+        z-index: 3;
+    }
+
+    .module-content {
+        font-family: "Share Tech Mono", monospace;
+        color: #f5f5f5;
+        margin: 0 0 20px;
+        font-size: 17px;
+        line-height: 1.2;
+    }
+
+        .module-content span {
+            color: #f0c674;
+        }
+
+        .module-content i {
+            color: #8abeb7;
+        }
+
+        .module-content a {
+            text-decoration: none;
+            color: #81a2be;
+        }
+
+        .module-content b {
+            color: #81a2be;
+        }
+
+    .functionality-list {
+        margin-left: 20px;
+    }
+
+        .functionality-list li {
+            margin-bottom: 5px;
+        }
+
+    body {
+        background-image: linear-gradient(120deg, #4f0088 0%, #000000 100%);
+        height: 100vh;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+        box-sizing: border-box;
+        color: inherit;
+    }
+
+    a.avatar {
+        position: fixed;
+        bottom: 15px;
+        right: -100px;
+        animation: slide 0.5s 4.5s forwards;
+        display: block;
+        z-index: 4;
+    }
+
+        a.avatar img {
+            border-radius: 100%;
+            width: 44px;
+            border: 2px solid white;
+        }
+    .h{
+        font-size: 15vw;
+        text-align: center;
+        position: fixed;
+        width: 100vw;
+        z-index: 1;
+        color: #ffffff26;
+        text-shadow: 0 0 50px rgba(0, 0, 0, 0.07);
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: "Montserrat", monospace;
+        right: 2rem;
+    
+    }
+</style>
+
+<script>
+    var str = document.getElementsByClassName('module-content')[0].innerHTML.toString();
+    var i = 0;
+    document.getElementsByClassName('module-content')[0].innerHTML = "";
+
+    setTimeout(function () {
+        var se = setInterval(function () {
+            i++;
+            document.getElementsByClassName('module-content')[0].innerHTML = str.slice(0, i) + "|";
+            if (i == str.length) {
+                clearInterval(se);
+                document.getElementsByClassName('module-content')[0].innerHTML = str;
+            }
+        }, 10);
+    }, 0);
+</script>
