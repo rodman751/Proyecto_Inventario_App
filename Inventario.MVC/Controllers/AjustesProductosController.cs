@@ -34,7 +34,7 @@ namespace Inventario.MVC.Controllers
             _notifyService = notyfService;
         }
         // GET: AjustesProductosController
-        //[Authorize(Roles= "INV-ADMIN")]
+        [Authorize(Roles= "INV-ADMIN")]
         public ActionResult Index(int? page)
         {
             int pageNumber = page ?? 1;
@@ -43,7 +43,7 @@ namespace Inventario.MVC.Controllers
             _notifyService.Success("Datos cargados correctamente");
             return View(data);
         }
-        //[Authorize(Roles= "INV-ADMIN")]
+        [Authorize(Roles= "INV-ADMIN")]
         public async Task<ActionResult> getDetallesSQL(int id)
         {
             var data = await CRUD<DetalleAjusteProductoDTO>.Read_ByIdSQLAsync(urlApi2, id);
@@ -52,6 +52,7 @@ namespace Inventario.MVC.Controllers
         }
 
         // GET: AjustesProductosController/Details/5
+        [Authorize(Roles = "INV-ADMIN")]
         public ActionResult Details(int id)
         {
             var data = CRUD<DetalleAjusteProducto>.Read_ById(postdetalles, id);
@@ -61,6 +62,7 @@ namespace Inventario.MVC.Controllers
         }
 
         // GET: AjustesProductosController/Create
+        [Authorize(Roles = "INV-ADMIN")]
         public ActionResult CreateDetalleAjusteProducto(int id)
         {
             var productos = CRUD<Producto>.Read(Productos);
@@ -68,6 +70,7 @@ namespace Inventario.MVC.Controllers
             ViewBag.ID_Ajuste = id;
             return View();
         }
+        [Authorize(Roles = "INV-ADMIN")]
         public ActionResult Edit(int id)
         {
             var data = CRUD<DetalleAjusteProducto>.Read_ById(postdetalles, id);
@@ -131,7 +134,7 @@ namespace Inventario.MVC.Controllers
                 return View();
             }
         }
-        
+        [Authorize(Roles = "INV-ADMIN")]
         public ActionResult NewAjuste( )
         {
             var lastAjuste = CRUD<AjusteProducto>.Read_lastcod(getCodigo);

@@ -13,7 +13,7 @@ namespace Inventario.MVC.Controllers
         {
             _logger = logger;
         }
-        //[Authorize]
+        [Authorize]
         public IActionResult Index()
         {
             ViewData["NoLayout"] = true;

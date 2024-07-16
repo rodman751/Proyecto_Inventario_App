@@ -19,7 +19,7 @@ namespace Inventario.MVC.Controllers
             _notifyService = notyfService;
         }
         // GET: ProductosController
-        //[Authorize(Roles = "Administrador Compras,Bodeguero Inventario")]
+        [Authorize(Roles = "INV-ADMIN")]
         public ActionResult Index(int? page)
         {
             int pageNumber = page ?? 1;
@@ -35,6 +35,7 @@ namespace Inventario.MVC.Controllers
         }
 
         // GET: ProductosController/Create
+        [Authorize(Roles = "INV-ADMIN")]
         public ActionResult _CreatePartial()
         {
              return View();
@@ -70,6 +71,7 @@ namespace Inventario.MVC.Controllers
         }
 
         // GET: ProductosController/Edit/5
+        [Authorize(Roles = "INV-ADMIN")]
         public ActionResult EditPartial(int id)
         {
             var data = CRUD<Producto>.Read_ById(Productos,id);
