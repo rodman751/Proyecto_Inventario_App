@@ -80,6 +80,7 @@ namespace Inventario.ConsumeAPI
                 return result;
             }
         }
+
         //public static T Read_Token_getROL(string urlApi, string token, string id)
         //{
         //    using (HttpClient client = new HttpClient())
@@ -215,6 +216,35 @@ namespace Inventario.ConsumeAPI
                 {
                     usr_user = username,
                     usr_password = password
+                };
+
+                var json = Newtonsoft.Json.JsonConvert.SerializeObject(loginData);
+                var request = new HttpRequestMessage(HttpMethod.Post, urlApi);
+                request.Content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var response = client.SendAsync(request);
+                response.Wait();
+
+                json = response.Result.Content.ReadAsStringAsync().Result;
+                var result = JsonConvert.DeserializeObject<T>(json);
+
+                return result;
+            }
+        }
+        public static T Login2(string urlApi, string username, string password, string modulo)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(urlApi);
+                client.DefaultRequestHeaders.Accept.Add(
+                    System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json")
+                );
+
+                var loginData = new
+                {
+                    usr_user = username,
+                    usr_password = password,
+                    mod_name= modulo
                 };
 
                 var json = Newtonsoft.Json.JsonConvert.SerializeObject(loginData);

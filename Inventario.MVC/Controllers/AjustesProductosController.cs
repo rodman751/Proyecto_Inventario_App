@@ -2,6 +2,7 @@
 using Inventario.ConsumeAPI;
 using Inventario.Entidades;
 using Inventario.Entidades.DTO;
+using Inventario.MVC.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +22,7 @@ namespace Inventario.MVC.Controllers
         private string Productos;
         private string postdetalles;
         private string getCodigo;
-
+        private string audit;
         public AjustesProductosController(IConfiguration configuration, INotyfService notyfService)
         {
             urlApi = configuration.GetValue("ApiUrlBase", "").ToString() + "/AjusteProducto";
@@ -29,6 +30,7 @@ namespace Inventario.MVC.Controllers
             Productos = configuration.GetValue("ApiUrlBase", "").ToString() + "/Producto";
             postdetalles= configuration.GetValue("ApiUrlBase", "").ToString() + "/DetalleAjusteProducto";
             getCodigo = configuration.GetValue("ApiUrlBase", "").ToString() + "/AjusteProducto/LastAjuste";
+            audit = configuration.GetValue("UrlLogin", "").ToString() + "/auditoria";
 
 
             _notifyService = notyfService;
@@ -88,9 +90,21 @@ namespace Inventario.MVC.Controllers
                 int idAjuste = ajusteProducto.ID_Ajuste;
                 if (ModelState.IsValid)
                 {
-                    
+                    var userName = HttpContext.User.Identity.Name;
+                    var modulo = HttpContext.User.Claims.FirstOrDefault(c => c.Type == "Modulos")?.Value;
+                    var auditdata = new auditoria
+                    {
+
+                        aud_usuario = userName,
+                        aud_accion = "Update",
+                        aud_modulo = "Inventario",
+                        aud_funcionalidad = modulo,
+                        aud_observacion = "Update Detalle Ajuste "
+                    };
+                    var auditresponse = CRUD<auditoria>.Created(audit, auditdata);
+
                     var newData = CRUD<DetalleAjusteProducto>.Update(postdetalles, id, ajusteProducto);
-                    _notifyService.Success("Detalle Ajuste de producto actualizado correctamente");
+                    _notifyService.Information("Detalle Ajuste de producto actualizado correctamente");
                     return RedirectToAction("getDetallesSQL", new { id = idAjuste });
                 }
                 else
@@ -116,7 +130,19 @@ namespace Inventario.MVC.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    
+                    var userName = HttpContext.User.Identity.Name;
+                    var modulo = HttpContext.User.Claims.FirstOrDefault(c => c.Type == "Modulos")?.Value;
+                    var auditdata = new auditoria
+                    {
+
+                        aud_usuario = userName,
+                        aud_accion = "Create",
+                        aud_modulo = "Inventario",
+                        aud_funcionalidad = modulo,
+                        aud_observacion = "Create new Detalle Ajuste "
+                    };
+                    var auditresponse = CRUD<auditoria>.Created(audit, auditdata);
+
                     var newData = CRUD<DetalleAjusteProducto>.Created(postdetalles, ajusteProducto);
                     
                     _notifyService.Success("detalle Ajuste de producto creado correctamente");
@@ -159,7 +185,19 @@ namespace Inventario.MVC.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                   
+                    var userName = HttpContext.User.Identity.Name;
+                    var modulo = HttpContext.User.Claims.FirstOrDefault(c => c.Type == "Modulos")?.Value;
+                    var auditdata = new auditoria
+                    {
+
+                        aud_usuario = userName,
+                        aud_accion = "Create",
+                        aud_modulo = "Inventario",
+                        aud_funcionalidad = modulo,
+                        aud_observacion = "Create new Ajuste "
+                    };
+                    var auditresponse = CRUD<auditoria>.Created(audit, auditdata);
+
                     var newData = CRUD<AjusteProducto>.Created(urlApi, ajusteProducto);
 
                     _notifyService.Success(" Ajuste  creado correctamente");
@@ -187,6 +225,18 @@ namespace Inventario.MVC.Controllers
                 var idAjuste = pro.ID_Ajuste;
                 if (ModelState.IsValid)
                 {
+                    var userName = HttpContext.User.Identity.Name;
+                    var modulo = HttpContext.User.Claims.FirstOrDefault(c => c.Type == "Modulos")?.Value;
+                    var auditdata = new auditoria
+                    {
+
+                        aud_usuario = userName,
+                        aud_accion = "Delete",
+                        aud_modulo = "Inventario",
+                        aud_funcionalidad = modulo,
+                        aud_observacion = "Delete Ajuste"
+                    };
+                    var auditresponse = CRUD<auditoria>.Created(audit, auditdata);
 
                     var newData = CRUD<AjusteProducto>.Delete(postdetalles, id);
 

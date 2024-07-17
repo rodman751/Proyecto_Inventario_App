@@ -2,6 +2,7 @@ using Inventario.MVC.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace Inventario.MVC.Controllers
 {
@@ -16,6 +17,15 @@ namespace Inventario.MVC.Controllers
         [Authorize]
         public IActionResult Index()
         {
+            var userName = HttpContext.User.Identity.Name;
+            var rol = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+            var funcionalidad = HttpContext.User.Claims.FirstOrDefault(c => c.Type == "Modulos")?.Value;
+
+            // Construir el mensaje de bienvenida
+            var mensajeBienvenida = $"Bienvenido, {userName} ({rol}). Funcionalidad actual: {funcionalidad}";
+
+            // Puedes pasar el mensajeBienvenida como un ViewBag o ViewData
+            ViewData["MensajeBienvenida"] = mensajeBienvenida;
             ViewData["NoLayout"] = true;
             return View();
         }
@@ -34,6 +44,7 @@ namespace Inventario.MVC.Controllers
         
         public IActionResult AccessDenied()
         {
+            ViewData["NoLayout"] = true;
             return View();
         }
 

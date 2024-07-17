@@ -1,6 +1,7 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Inventario.ConsumeAPI;
 using Inventario.Entidades;
+using Inventario.MVC.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,10 +13,11 @@ namespace Inventario.MVC.Controllers
     {
         public INotyfService _notifyService { get; }
         private string Productos;
-        
+        private string audit;
         public ProductosController(IConfiguration configuration, INotyfService notyfService)
         {
             Productos = configuration.GetValue("ApiUrlBase", "").ToString() + "/Producto";
+            audit = configuration.GetValue("UrlLogin", "").ToString() + "/auditoria";
             _notifyService = notyfService;
         }
         // GET: ProductosController
@@ -49,6 +51,19 @@ namespace Inventario.MVC.Controllers
         {
             try
             {
+                var userName = HttpContext.User.Identity.Name;
+                var modulo = HttpContext.User.Claims.FirstOrDefault(c => c.Type == "Modulos")?.Value;
+                var auditdata = new auditoria
+                {
+
+                    aud_usuario = userName,
+                    aud_accion = "Create",
+                    aud_modulo = "Inventario",
+                    aud_funcionalidad = modulo,
+                    aud_observacion = " "
+                };
+                var auditresponse = CRUD<auditoria>.Created(audit, auditdata);
+
                 var pvp = collection.Costo;
                 if(collection.GravaIVA == true)
                 {
@@ -87,6 +102,19 @@ namespace Inventario.MVC.Controllers
         {
             try
             {
+                var userName = HttpContext.User.Identity.Name;
+                var modulo = HttpContext.User.Claims.FirstOrDefault(c => c.Type == "Modulos")?.Value;
+                var auditdata = new auditoria
+                {
+
+                    aud_usuario = userName,
+                    aud_accion = "Update",
+                    aud_modulo = "Inventario",
+                    aud_funcionalidad = modulo,
+                    aud_observacion = " "
+                };
+                var auditresponse = CRUD<auditoria>.Created(audit, auditdata);
+
                 var pvp = collection.Costo;
                 if (collection.GravaIVA == true)
                 {
@@ -122,9 +150,21 @@ namespace Inventario.MVC.Controllers
            
             try
             {
-                
+                var userName = HttpContext.User.Identity.Name;
+                var modulo = HttpContext.User.Claims.FirstOrDefault(c => c.Type == "Modulos")?.Value;
+                var auditdata = new auditoria
+                {
+
+                    aud_usuario = userName,
+                    aud_accion = "Delete",
+                    aud_modulo = "Inventario",
+                    aud_funcionalidad = modulo,
+                    aud_observacion = " "
+                };
+                var auditresponse = CRUD<auditoria>.Created(audit, auditdata);
                 var data = CRUD<Producto>.Delete(Productos, id);
                 _notifyService.Information("Producto eliminado");
+                
                 return RedirectToAction(nameof(Index));
             }
             catch
