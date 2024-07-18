@@ -427,7 +427,7 @@ a {
 
 .T_box {
     position: relative;
-    width: 90%; /* Aumentado para adaptarse mejor a tablas */
+    width: 100%; /* Aumentado para adaptarse mejor a tablas */
     max-width: 1200px; /* Limita el ancho máximo */
     backdrop-filter: blur(25px);
     border: 2px solid var(--primary-color);
@@ -585,3 +585,26 @@ a {
 
 
 
+
+/* details */
+.detalle-container {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid var(--primary-color);
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+.detalle-label {
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.detalle-value {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+}
