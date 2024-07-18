@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Inventario.API\Inventario.API.csproj" />
     <ProjectReference Include="..\Inventario.ConsumeAPI\Inventario.ConsumeAPI.csproj" />
     <ProjectReference Include="..\Inventario.Entidades\Inventario.Entidades.csproj" />
   </ItemGroup>
