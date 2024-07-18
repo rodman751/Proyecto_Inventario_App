@@ -427,7 +427,7 @@ a {
 
 .T_box {
     position: relative;
-    /*width: 90%;*/ /* Aumentado para adaptarse mejor a tablas */
+    width: 90%; /* Aumentado para adaptarse mejor a tablas */
     max-width: 1200px; /* Limita el ancho máximo */
     backdrop-filter: blur(25px);
     border: 2px solid var(--primary-color);

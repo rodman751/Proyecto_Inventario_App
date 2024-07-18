@@ -36,7 +36,7 @@
                                 </li>
                             }
 
-                            @if (userRole == "INV-ADMIN")
+                            @if (userRole == "INV-ADMIN" || userRole == "INV-BODEGUERO")
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-black" asp-area="" asp-controller="Productos" asp-action="Index">Productos</a>
