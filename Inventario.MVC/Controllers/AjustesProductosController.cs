@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.OpenApi.Writers;
+
 using X.PagedList.Extensions;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
