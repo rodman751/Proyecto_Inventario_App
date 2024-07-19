@@ -18,6 +18,13 @@ namespace Inventario.API
                 .AddNewtonsoftJson(
                     options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin",
+                    builder => builder.WithOrigins("http://45.70.13.48")
+                                      .AllowAnyMethod()
+                                      .AllowAnyHeader());
+            });
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -30,7 +37,8 @@ namespace Inventario.API
                // app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI();
-            
+
+            app.UseCors("AllowSpecificOrigin");
 
             app.UseHttpsRedirection();
 

@@ -1,11 +1,12 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using System.Security.Claims
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Inventario.MVC</title>
+    <title>@ViewData["Title"] - Módulo de Inventario</title>
+   
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Inventario.MVC.styles.css" asp-append-version="true" />
@@ -20,7 +21,7 @@
             </button>
             <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasVerticalNavbar" aria-labelledby="offcanvasVerticalNavbarLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasVerticalNavbarLabel">Inventario.MVC</h5>
+                    <h5 class="offcanvas-title" id="offcanvasVerticalNavbarLabel">Módulo de Inventario</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
@@ -32,25 +33,25 @@
                             @if (userRole == "INV-ADMIN")
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link active text-black" asp-area="" asp-controller="AjustesProductos" asp-action="Index">Lista de Ajustes</a>
+                                    <a class="nav-link active text-black" asp-area="" asp-controller="AjustesProductos" asp-action="Index">- Lista de Ajustes</a>
                                 </li>
                             }
 
                             @if (userRole == "INV-ADMIN" || userRole == "INV-BODEGUERO")
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-black" asp-area="" asp-controller="Productos" asp-action="Index">Productos</a>
+                                    <a class="nav-link text-black" asp-area="" asp-controller="Productos" asp-action="Index">- Productos</a>
                                 </li>
                             }
 
                             <li class="nav-item">
-                                <a class="nav-link text-black" asp-area="" asp-controller="Login" asp-action="Salir">Salir</a>
+                                <a class="nav-link text-black" asp-area="" asp-controller="Login" asp-action="Salir">- Salir</a>
                             </li>
                         }
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-black" asp-area="" asp-controller="Login" asp-action="Index">Login</a>
+                                <a class="nav-link text-black" asp-area="" asp-controller="Login" asp-action="Index"> - Inicio de sesión</a>
                             </li>
                         }
                     </ul>

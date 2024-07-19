@@ -4,24 +4,24 @@
 <div class="wrapper">
     <div class="login_box">
         <div class="login-header">
-            <span>Login</span>
+            <span>Inicio de sesión</span>
         </div>
         <form asp-action="Login">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="input_box">
                 <input asp-for="usr_user" class="input-field" required />
-                <label for="usr_user" class="label">Username</label>
+                <label for="usr_user" class="label">Usuario</label>
                 <i class="bx bx-user icon"></i>
                 <span asp-validation-for="usr_user" class="text-danger"></span>
             </div>
             <div class="input_box">
                 <input asp-for="usr_password" type="password" class="input-field" required />
-                <label for="usr_password" class="label">Password</label>
+                <label for="usr_password" class="label">Contraseña</label>
                 <i class="bx bx-lock-alt icon"></i>
                 <span asp-validation-for="usr_password" class="text-danger"></span>
             </div>
             <div class="input_box">
-                <input type="submit" class="input-submit" value="Login" />
+                <input type="submit" class="input-submit" value="Ingresar" />
             </div>
         </form>
     </div>

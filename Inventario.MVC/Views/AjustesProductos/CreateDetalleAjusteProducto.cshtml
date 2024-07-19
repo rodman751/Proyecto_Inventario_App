@@ -32,7 +32,7 @@
 
                 <div class="input_box-F">
                     <i class="bx bx-font icon"></i>
-                    <input asp-for="CantidadAjustada" class="input-field-F" required/>
+                <input asp-for="CantidadAjustada" class="input-field-F" pattern="^[+-]?\d+$" required />
                     <label asp-for="CantidadAjustada" class="label-F">Cantidad Ajustada</label>
                     <span asp-validation-for="CantidadAjustada" class="text-danger"></span>
                 </div>

@@ -24,22 +24,22 @@
                 </div>
 
                 <div class="input_box-F">
-                    <i class="bx bx-barcode icon"></i>
-                    <select asp-for="ID_Producto" class="input-field-F" asp-items="ViewBag.Productos"></select>
-                    <label asp-for="ID_Producto" class="label-F">Selecciona el Producto</label>
+                    <i class="bx bx-barcode icon" hidden></i>
+                    <select asp-for="ID_Producto" class="input-field-F" asp-items="ViewBag.Productos" hidden></select>
+                    <label asp-for="ID_Producto" class="label-F" hidden>Selecciona el Producto </label>
                     <span asp-validation-for="ID_Producto" class="text-danger"></span>
                 </div>
 
                 <div class="input_box-F">
-                    <i class="bx bx-font icon"></i>
-                    <input asp-for="CantidadAjustada" class="input-field-F" />
-                    <label asp-for="CantidadAjustada" class="label-F">Cantidad Ajustada</label>
+                    <i class="bx bx-font icon" hidden></i>
+                    <input asp-for="CantidadAjustada" class="input-field-F"  hidden/>
+                    <label asp-for="CantidadAjustada" class="label-F" hidden>Cantidad Ajustada</label>
                     <span asp-validation-for="CantidadAjustada" class="text-danger"></span>
                 </div>
 
                 <div class="input_box-F">
                     <i class="bx bx-comment-detail icon"></i>
-                    <input asp-for="RazonAjuste" class="input-field-F" />
+                    <input asp-for="RazonAjuste" class="input-field-F"  />
                     <label asp-for="RazonAjuste" class="label-F">Razón del Ajuste</label>
                     <span asp-validation-for="RazonAjuste" class="text-danger"></span>
                 </div>

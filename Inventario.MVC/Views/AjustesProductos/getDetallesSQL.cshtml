@@ -13,7 +13,7 @@
         </div>
 
         <div class="form-container">
-            <form asp-controller="Reporte" asp-action="PrevisualizarPDF" method="post">
+            <form asp-controller="Reporte" asp-action="PrevisualizarPDF" asp-route-id="@ViewBag.ID_Ajuste" method="post">
                 <div class="input_box">
                     <input type="text" class="input-field" id="descripcion" name="descripcion" required />
                     <label for="descripcion" class="label">Descripción del Ajuste</label>
@@ -21,6 +21,15 @@
                 </div>
                 <div class="input_box">
                     <button type="submit" class="btn btn-primary">Generar PDF</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="form-container">
+            <form asp-controller="Reporte" asp-action="ImprimirPDF" asp-route-id="@ViewBag.ID_Ajuste" onsubmit="return confirmImpresion();" method="post">
+                <div class="input_box">
+                    <input class="input-field-F" id="ID_Ajuste" name="ID_Ajuste" value=@ViewBag.Id_Ajuste hidden />
+                    <button type="submit" class="btn btn-primary">Imprimir PDF</button>
                 </div>
             </form>
         </div>
@@ -69,5 +78,9 @@
     function confirmDelete() {
         return confirm("¿Estás seguro de que deseas eliminar?");
     }
+    function confirmImpresion() {
+        return confirm("¿Estás seguro de imprimir el ajuste? Una vez impreso, no podrás editarlo.");
+    }
+
 </script>
 

@@ -3,6 +3,7 @@ using Inventario.ConsumeAPI;
 using Inventario.Entidades;
 using Inventario.Entidades.DTO;
 using Inventario.MVC.Models;
+using iTextSharp.text.pdf.codec.wmf;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -87,6 +88,43 @@ namespace Inventario.MVC.Controllers
         {
             try
             {
+
+                //var cantidadAjustada = ajusteProducto.CantidadAjustada;
+                //var idProducto = ajusteProducto.ID_Producto;
+                //var producto = CRUD<Producto>.Read_ById(Productos, idProducto);
+                //var stockActual = producto.StockProducto;
+
+                //if (cantidadAjustada != 0)
+                //{
+                //    var nuevoStock = stockActual + cantidadAjustada;
+
+                //    if (nuevoStock < 0)
+                //    {
+                //        // Retorna un error y un mensaje en tu front de stock insuficiente
+                //        // Puedes lanzar una excepción, retornar un resultado de error o manejarlo según tu lógica
+                //        //throw new InvalidOperationException("Error: No hay suficiente stock para realizar el ajuste.");
+                //        _notifyService.Error("Error: No hay suficiente stock para realizar el ajuste.");
+                //        return RedirectToAction("Edit", new { id = ajusteProducto.ID_DetalleAjuste });
+
+                //    }
+                //    else
+                //    {
+                //        var productoActualizado = new Producto
+                //        {
+                //            ID_Producto = idProducto,
+                //            Codigo = producto.Codigo,
+                //            Nombre = producto.Nombre,
+                //            Descripcion = producto.Descripcion,
+                //            GravaIVA = producto.GravaIVA,
+                //            Costo = producto.Costo,
+                //            PVP = producto.PVP,
+                //            Estado = producto.Estado,
+                //            StockProducto = nuevoStock
+                //        };
+                //        CRUD<Producto>.Update(Productos, idProducto, productoActualizado);
+                //    }
+                //}
+
                 int idAjuste = ajusteProducto.ID_Ajuste;
                 if (ModelState.IsValid)
                 {
@@ -103,6 +141,7 @@ namespace Inventario.MVC.Controllers
                     };
                     var auditresponse = CRUD<auditoria>.Created(audit, auditdata);
 
+                   
                     var newData = CRUD<DetalleAjusteProducto>.Update(postdetalles, id, ajusteProducto);
                     _notifyService.Information("Detalle Ajuste de producto actualizado correctamente");
                     return RedirectToAction("getDetallesSQL", new { id = idAjuste });
@@ -130,6 +169,45 @@ namespace Inventario.MVC.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                   
+                    var cantidadAjustada = ajusteProducto.CantidadAjustada;
+                    var idProducto = ajusteProducto.ID_Producto;
+                    var producto = CRUD<Producto>.Read_ById(Productos, idProducto);
+                    var stockActual = producto.StockProducto;
+
+                    if (cantidadAjustada != 0)
+                    {
+                        var nuevoStock = stockActual + cantidadAjustada;
+
+                        if (nuevoStock < 0)
+                        {
+                            // Retorna un error y un mensaje en tu front de stock insuficiente
+                            // Puedes lanzar una excepción, retornar un resultado de error o manejarlo según tu lógica
+                            //throw new InvalidOperationException("Error: No hay suficiente stock para realizar el ajuste.");
+                            _notifyService.Error("Error: No hay suficiente stock para realizar el ajuste.");
+                            return RedirectToAction("CreateDetalleAjusteProducto", new { id = ajusteProducto.ID_Ajuste });
+
+                        }
+                        else
+                        {
+                            var productoActualizado = new Producto
+                            {
+                                ID_Producto = idProducto,
+                                Codigo = producto.Codigo,
+                                Nombre = producto.Nombre,
+                                Descripcion = producto.Descripcion,
+                                GravaIVA = producto.GravaIVA,
+                                Costo = producto.Costo,
+                                PVP = producto.PVP,
+                                Estado = producto.Estado,
+                                StockProducto = nuevoStock
+                            };
+                            CRUD<Producto>.Update(Productos, idProducto, productoActualizado);
+                        }
+                    }
+
+
+
                     var userName = HttpContext.User.Identity.Name;
                     var modulo = HttpContext.User.Claims.FirstOrDefault(c => c.Type == "Modulos")?.Value;
                     var auditdata = new auditoria
@@ -142,6 +220,8 @@ namespace Inventario.MVC.Controllers
                         aud_observacion = "Create new Detalle Ajuste "
                     };
                     var auditresponse = CRUD<auditoria>.Created(audit, auditdata);
+
+ 
 
                     var newData = CRUD<DetalleAjusteProducto>.Created(postdetalles, ajusteProducto);
                     
@@ -221,7 +301,35 @@ namespace Inventario.MVC.Controllers
         {
             try
             {
+
+               
+
+                // Recupera el ajuste de stock asociado
                 var pro = CRUD<DetalleAjusteProducto>.Read_ById(postdetalles, id);
+
+                var producto = CRUD<Producto>.Read_ById(Productos, pro.ID_Producto);
+
+                if (producto == null)
+                {
+                    // Maneja el caso en que el producto no existe
+                    return NotFound();
+                }
+                // Verifica si hay un ajuste que revertir
+                if (pro != null)
+                {
+                    // Calcula el stock original antes del ajuste
+                    var stockOriginal = producto.StockProducto - pro.CantidadAjustada;
+
+                    // Actualiza el stock del producto a su valor original
+                    producto.StockProducto = stockOriginal;
+
+                    CRUD<Producto>.Update(Productos, pro.ID_Producto, producto);
+                }
+
+
+
+
+                //var pro = CRUD<DetalleAjusteProducto>.Read_ById(postdetalles, id);
                 var idAjuste = pro.ID_Ajuste;
                 if (ModelState.IsValid)
                 {

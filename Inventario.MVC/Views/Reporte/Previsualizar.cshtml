@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Previsualizar Reporte";
 }
+@model Inventario.Entidades.AjusteProducto
 
 <h2>Previsualización del Reporte de Ajustes de Inventario</h2>
 
@@ -11,3 +12,17 @@
     <input type="hidden" name="pdfPath" value="@ViewBag.PDFPath" />
     <button type="submit" class="btn btn-primary">Descargar PDF</button>
 </form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        // Asegúrate de que el script se ejecuta cuando el DOM está completamente cargado
+        document.addEventListener("DOMContentLoaded", function () {
+            // Asignar el valor del ID_Ajuste desde el ViewBag
+            var idAjuste = @ViewBag.ID_Ajuste;
+            document.getElementById("ID_Ajuste").value = idAjuste;
+        });
+    </script>
+}

@@ -1,13 +1,26 @@
 ﻿using System;
 using System.IO;
+using AspNetCoreHero.ToastNotification.Abstractions;
+using Inventario.ConsumeAPI;
+using Inventario.Entidades;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Build.Framework;
 
 namespace WebApplication1.Controllers
 {
     public class ReporteController : Controller
     {
+        public INotyfService _notifyService { get; }
+        private string urlApi;
+        public ReporteController(IConfiguration configuration, INotyfService notyfService)
+        {
+            urlApi = configuration.GetValue("ApiUrlBase", "").ToString() + "/AjusteProducto";
+            _notifyService = notyfService;
+        }
+
+       
         public IActionResult Index()
         {
             return View();
@@ -165,5 +178,23 @@ namespace WebApplication1.Controllers
                 return NotFound();
             }
         }
+
+        [HttpPost]
+        public IActionResult ImprimirPDF(int id)
+        {
+            ViewBag.ID_Ajuste = id;
+            var data = CRUD<AjusteProducto>.Read_ById(urlApi,id);
+            var newdata = new AjusteProducto
+            {
+                ID_Ajuste = data.ID_Ajuste,
+                NumeroAjuste = data.NumeroAjuste,
+                Fecha = data.Fecha,
+                Descripcion = data.Descripcion,
+                Impreso = true
+            };
+            CRUD<AjusteProducto>.Update(urlApi, newdata.ID_Ajuste, newdata);
+            return RedirectToAction("Index","AjustesProductos");
+        }
     }
 }
+
